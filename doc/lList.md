@@ -3,6 +3,7 @@ lList is a double-linked list.
 
 ## APIs Index
 * [lListCreateBySize](#llistcreatebysize)  
+* [lListCreate](#llistcreate)
 * [lListDelete](#llistdelete)  
 * [lListSetValue](#llistsetvalue)  
 * [lListGetValue](#llistgetvalue)  
@@ -17,6 +18,57 @@ lList is a double-linked list.
 * [lListFindBefore](#llistfindbefore)
 * [lListCount](#llistcount)
 
+## Demo
+```C
+#include <stdio.h>
+#include "lList.h"
+
+int main()
+{
+	/* Create list and set value to node */
+	lListNode* node = lListCreate(char[100]);
+	printf("Data size is %lu bytes\n",node->size);
+	char hello[100] = "hello world";
+	lListSetValue(node,hello);
+	
+	/* Insert 3 node before node */
+	lListNode* head = lListInsertBefore(node);
+	lListInsertBefore(node);
+	lListInsertBefore(node);
+	lListSetValue(head,hello);
+	
+	/* Find "hello world" */
+	lListNode* find = lListFindAfter(head,hello,1);
+	printf("%p %p\n",head,find);
+	
+	/* Get tail node */
+	lListNode* tail = lListTail(head);
+	find = lListFindAfter(head,hello,2);
+	printf("%p %p %p\n",node,tail,find);
+	
+	/* Get data */
+	char str[100];
+	lListGetValue(tail,str);	
+	printf("Data is \"%s\"\n",str);
+	
+	/* Get number of nodes */
+	size_t len = lListCount(head);
+	printf("Number of nodes is %lu\n",len);
+	tail = lListAfter(head,len-1);
+	printf("%p %p\n",node,tail);
+	
+	/* Insert after */
+	tail = lListInsertAfter(tail);
+	tail = lListInsertAfter(tail);
+	
+	/* Remove node */
+	lListRemove(node);
+	len = lListCount(head);
+	printf("Number of nodes is %lu\n",len);
+	printf("%p %p\n",tail,lListAfter(head,len-1));
+}
+```
+
 ## APIs
 ### lListCreateBySize
 ```C
@@ -28,6 +80,18 @@ lList is a double-linked list.
  * RETURN : head lListNode of list or nullptr
  */
 lListNode* lListCreateBySize(size_t datasize);
+```
+
+### lListCreate
+```C
+/*
+ * USE    : Create linked list
+ *
+ * PARAM  : T - type of node's data
+ *
+ * RETURN : head lListNode of list or nullptr
+ */
+#define lListCreate(T) lListCreateBySize(sizeof(T))
 ```
 
 ### lListDelete

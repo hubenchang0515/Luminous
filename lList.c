@@ -173,9 +173,12 @@ lListNode* lListInsertAfter(lListNode* node)
 	lListNode* p = lListCreateNodeBySize(node->size);
 	if(p != nullptr)
 	{
+		if(node->next != nullptr)
+		{
+			p->next = node->next;
+			node->next->prev = p;
+		}
 		p->prev = node;
-		p->next = node->next;
-		node->next->prev = p;
 		node->next = p;
 	}
 	
@@ -195,9 +198,12 @@ lListNode* lListInsertBefore(lListNode* node)
 	lListNode* p = lListCreateNodeBySize(node->size);
 	if(p != nullptr)
 	{
+		if(node->prev != nullptr)
+		{
+			p->prev = node->prev;
+			node->prev->next = p;
+		}
 		p->next = node;
-		p->prev = node->prev;
-		node->prev->next = p;
 		node->prev = p;
 	}
 	
@@ -269,6 +275,11 @@ lListNode* lListFindAfter(lListNode* node, ptr_t value, size_t ordinal)
 		{
 			i++;
 		}
+		
+		if( i >= ordinal )
+		{
+			break;
+		}
 	}
 	
 	return p;
@@ -291,6 +302,11 @@ lListNode* lListFindBefore(lListNode* node, ptr_t value, size_t ordinal)
 		if(memcmp(p->data, value, p->size) == 0)
 		{
 			i++;
+		}
+		
+		if( i >= ordinal )
+		{
+			break;
 		}
 	}
 	
