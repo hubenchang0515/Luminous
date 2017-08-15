@@ -1,4 +1,4 @@
-# lLisk
+# lList
 lList is a double-linked list.
 
 ## APIs Index
