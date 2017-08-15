@@ -89,7 +89,7 @@ lListNode* lListAfter(lListNode* node, size_t distance);
 lListNode* lListBefore(lListNode* node, size_t distance);
 ```
 
-### lListInsterAfter
+### lListInsertAfter
 ```C
 /* USE    : Insert a lListNode after node 
  *
@@ -97,10 +97,10 @@ lListNode* lListBefore(lListNode* node, size_t distance);
  *
  * RETURN : lListNode inserted or nullptr
  */
-lListNode* lListInsterAfter(lListNode* node);
+lListNode* lListInsertAfter(lListNode* node);
 ```
 
-### lListInsterBefore
+### lListInsertBefore
 ```C
 /* USE    : Insert a lListNode before node 
  *
@@ -108,7 +108,7 @@ lListNode* lListInsterAfter(lListNode* node);
  *
  * RETURN : lListNode inserted or nullptr
  */
-lListNode* lListInsterBefore(lListNode* node);
+lListNode* lListInsertBefore(lListNode* node);
 ```
 
 ### lListRemove

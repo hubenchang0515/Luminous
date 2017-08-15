@@ -168,7 +168,7 @@ lListNode* lListBefore(lListNode* node, size_t distance)
  *
  * RETURN : lListNode inserted or nullptr
  */
-lListNode* lListInsterAfter(lListNode* node)
+lListNode* lListInsertAfter(lListNode* node)
 {
 	lListNode* p = lListCreateNodeBySize(node->size);
 	if(p != nullptr)
@@ -190,7 +190,7 @@ lListNode* lListInsterAfter(lListNode* node)
  *
  * RETURN : lListNode inserted or nullptr
  */
-lListNode* lListInsterBefore(lListNode* node)
+lListNode* lListInsertBefore(lListNode* node)
 {
 	lListNode* p = lListCreateNodeBySize(node->size);
 	if(p != nullptr)
