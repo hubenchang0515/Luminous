@@ -25,7 +25,7 @@ lList is a double-linked list.
  *
  * PARAM  : datasize - size of node's data
  *
- * RETURN : pointer to header of linked list or nullptr
+ * RETURN : head lListNode of list or nullptr
  */
 lListNode* lListCreateBySize(size_t datasize);
 ```
@@ -35,7 +35,7 @@ lListNode* lListCreateBySize(size_t datasize);
 /*
  * USE    : Delete linked list
  *
- * PARAM  : list - any node of linked list
+ * PARAM  : list - any lListNode of list
  *
  * RETURN : void
  */
@@ -47,7 +47,7 @@ void lListDelete(lListNode* list);
 /*
  * USE    : Set value of node
  *
- * PARAM  : node  - node to set
+ * PARAM  : node  - lListNode to set
  *          value - pointer to value to set
  *
  * RETURN : void
@@ -60,7 +60,7 @@ void lListSetValue(lListNode* node, ptr_t value);
 /*
  * USE    : Get value of node
  *
- * PARAM  : node  - node to get
+ * PARAM  : node  - lListNode to get
  *          value - pointer to return value
  *
  * RETURN : void
@@ -73,8 +73,8 @@ void lListGetValue(lListNode* node, ptr_t value);
 /*
  * USE    : Get a lListNode after node
  *
- * PARAM  : node     - current node
- *          distance - distance to current node
+ * PARAM  : node     - after this lListNode
+ *          distance - distance to node
  *
  * RETURN : lListNode we want or nullptr
  */
@@ -86,8 +86,8 @@ lListNode* lListAfter(lListNode* node, size_t distance);
 /*
  * USE    : Get a lListNode before node
  *
- * PARAM  : node     - current node
- *          distance - distance to current node
+ * PARAM  : node     - before lListNode
+ *          distance - distance to node
  *
  * RETURN : lListNode we want or nullptr
  */
@@ -98,7 +98,7 @@ lListNode* lListBefore(lListNode* node, size_t distance);
 ```C
 /* USE    : Insert a lListNode after node 
  *
- * PARAM  : node - current node
+ * PARAM  : node - after this lListNode
  *
  * RETURN : lListNode inserted or nullptr
  */
@@ -109,7 +109,7 @@ lListNode* lListInsertAfter(lListNode* node);
 ```C
 /* USE    : Insert a lListNode before node 
  *
- * PARAM  : node - current node
+ * PARAM  : node - before this lListNode
  *
  * RETURN : lListNode inserted or nullptr
  */
