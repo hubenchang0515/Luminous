@@ -2,15 +2,15 @@
 lList is a double-linked list.
 
 ## APIs Index
-[lListCreateBySize](#lListCreateBySize)  
-[lListDelete](#lListDelete)  
-[lListSetValue](#lListSetValue)  
-[lListGetValue](#lListGetValue)  
-[lListAfter](#lListAfter)  
-[lListBefore](#lListBefore)  
-[lListInsertAfter](#lListInsertAfter)  
-[lListInsertBefore](#lListInsertBefore)  
-[lListRemove](#lListRemove)  
+* [lListCreateBySize](#lListCreateBySize)  
+* [lListDelete](#lListDelete)  
+* [lListSetValue](#lListSetValue)  
+* [lListGetValue](#lListGetValue)  
+* [lListAfter](#lListAfter)  
+* [lListBefore](#lListBefore)  
+* [lListInsertAfter](#lListInsertAfter)  
+* [lListInsertBefore](#lListInsertBefore)  
+* [lListRemove](#lListRemove)  
 
 ## APIs
 ### lListCreateBySize

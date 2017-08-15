@@ -2,4 +2,4 @@
 Luminous is a DATA STRUCTURE and ALGORITHMIC library of C programming language.
 
 ## DOC
-[lList : A double-linked list](/blob/master/doc/lList.md)
+[lList : A double-linked list](doc/lList.md)
