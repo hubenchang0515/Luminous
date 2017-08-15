@@ -66,22 +66,28 @@ void lListDelete(lListNode* list)
 	lListNode* node = nullptr;
 
 	/* free nodes before current node */
-	for(node = list->prev; node != nullptr; free(node->next) )
+	if(list->prev != nullptr)
 	{
+		for(node = list->prev; node->prev != nullptr; free(node->next) )
+		{
+			free(node->data);
+			node = node->prev;
+		}
 		free(node->data);
-		node = node->prev;
+		free(node); // first node
 	}
-	free(node->data); // first node
-	free(node);
 	
 	/* free nodes after current node */
-	for(node = list->next; node != nullptr; free(node->prev))
+	if(list->next != nullptr)
 	{
+		for(node = list->next; node->next != nullptr; free(node->prev))
+		{
+			free(node->data);
+			node = node->next;
+		} 
 		free(node->data);
-		node = node->next;
+		free(node); // last node
 	}
-	free(node->data); // last node
-	free(node);
 	
 	/* free current node */
 	free(list->data);

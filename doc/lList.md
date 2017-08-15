@@ -2,6 +2,7 @@
 lList is a double-linked list.
 
 ## APIs Index
+* [lListForEach](#llistforeach)
 * [lListCreateBySize](#llistcreatebysize)  
 * [lListCreate](#llistcreate)
 * [lListDelete](#llistdelete)  
@@ -67,6 +68,18 @@ int main()
 	printf("Number of nodes is %lu\n",len);
 	printf("%p %p\n",tail,lListAfter(head,len-1));
 	
+	/* Traverse list */
+	lListForEach(i,head)
+	{
+		lListSetValue(i,hello);
+	}
+	
+	lListForEach(i,head)
+	{
+		lListGetValue(i,str);
+		printf("%s\n",str);
+	}
+	
 	/* Delete */
 	lListDelete(head);
 	
@@ -75,6 +88,20 @@ int main()
 ```
 
 ## APIs
+
+### lListForEach
+```C
+/*
+ * USE    : Traverse list from start to the end
+ *
+ * PARAM  : iter  - lListNode used to traverse list
+ *          start - start lListNode of list
+ */
+#define lListForEach(iter,start) \
+	for(lListNode* iter = start; iter != nullptr; iter = iter->next)
+
+```
+
 ### lListCreateBySize
 ```C
 /*

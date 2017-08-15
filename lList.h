@@ -29,7 +29,8 @@ struct lListNode
 
 /* for-each */
 #ifndef lListFor 
-# 	define lListFor(index,header) for(size_t index = header; index!=nullptr; index = index->next)
+#	define lListForEach(iter,start) \
+		for(lListNode* iter = start; iter != nullptr; iter = iter->next)
 #endif // lListFor
 
 
