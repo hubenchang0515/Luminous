@@ -45,7 +45,7 @@ static lListNode* lListCreateNodeBySize(size_t datasize)
  *
  * PARAM  : datasize - size of node's data
  *
- * RETURN : pointer to header of linked list or nullptr
+ * RETURN : head lListNode of list or nullptr
  */
 lListNode* lListCreateBySize(size_t datasize)
 {
@@ -57,7 +57,7 @@ lListNode* lListCreateBySize(size_t datasize)
 /*
  * USE    : Delete linked list
  *
- * PARAM  : list - any node of linked list
+ * PARAM  : list - any lListNode of list
  *
  * RETURN : void
  */
@@ -93,7 +93,7 @@ void lListDelete(lListNode* list)
 /*
  * USE    : Set value of node
  *
- * PARAM  : node  - node to set
+ * PARAM  : node  - lListNode to set
  *          value - pointer to value to set
  *
  * RETURN : void
@@ -108,7 +108,7 @@ void lListSetValue(lListNode* node, ptr_t value)
 /*
  * USE    : Get value of node
  *
- * PARAM  : node  - node to get
+ * PARAM  : node  - lListNode to get
  *          value - pointer to return value
  *
  * RETURN : void
@@ -123,8 +123,8 @@ void lListGetValue(lListNode* node, ptr_t value)
 /*
  * USE    : Get a lListNode after node
  *
- * PARAM  : node     - current node
- *          distance - distance to current node
+ * PARAM  : node     - after this lListNode
+ *          distance - distance to node
  *
  * RETURN : lListNode we want or nullptr
  */
@@ -144,8 +144,8 @@ lListNode* lListAfter(lListNode* node, size_t distance)
 /*
  * USE    : Get a lListNode before node
  *
- * PARAM  : node     - current node
- *          distance - distance to current node
+ * PARAM  : node     - before this lListNode
+ *          distance - distance to node
  *
  * RETURN : lListNode we want or nullptr
  */
@@ -164,7 +164,7 @@ lListNode* lListBefore(lListNode* node, size_t distance)
 
 /* USE    : Insert a lListNode after node 
  *
- * PARAM  : node - current node
+ * PARAM  : node - after this lListNode
  *
  * RETURN : lListNode inserted or nullptr
  */
@@ -186,7 +186,7 @@ lListNode* lListInsertAfter(lListNode* node)
 
 /* USE    : Insert a lListNode before node 
  *
- * PARAM  : node - current node
+ * PARAM  : node - before this lListNode
  *
  * RETURN : lListNode inserted or nullptr
  */
@@ -219,4 +219,107 @@ void lListRemove(lListNode* node)
 	free(node->data);
 	free(node);
 }
+
+
+
+/* USE    : Head of list 
+ *
+ * PARAM  : node - any lListNode of list
+ *
+ * RETURN : Head lListNode of list
+ */
+lListNode* lListHead(lListNode* node)
+{
+	lListNode* p = node;
+	for( ; p->prev != nullptr; p = p->prev);
+	
+	return p;
+}
+
+/* USE    : Tail of list
+ *
+ * PARAM  : node - any lListNode of list
+ *
+ * RETURN : Tail lListNode of list
+ */
+lListNode* lListTail(lListNode* node)
+{
+	lListNode* p = node;
+	for( ; p->next != nullptr; p = p->next);
+	
+	return p;
+}
+
+/* USE    : Find a lListNode after node
+ * 
+ * PARAM  : node   - after this lListNode
+ *          value  - pointer to value
+ *          ordinal - ordinal number 
+ *
+ * RETURN : number ordinal lListNode, whose data equals to value, 
+ *          after node(inclusive) , or nullptr 
+ */
+
+lListNode* lListFindAfter(lListNode* node, ptr_t value, size_t ordinal)
+{
+	lListNode* p = node;
+	for(size_t i = 0; i < ordinal && p != nullptr; p = p->next)
+	{
+		if(memcmp(p->data, value, p->size) == 0)
+		{
+			i++;
+		}
+	}
+	
+	return p;
+}
+
+/* USE    : Find a lListNode before node
+ * 
+ * PARAM  : node   - before this lListNode
+ *          value  - pointer to value
+ *          ordinal - ordinal number 
+ *
+ * RETURN : number ordinal lListNode, whose data equals to value, 
+ *          before node(inclusive) , or nullptr 
+ */
+lListNode* lListFindBefore(lListNode* node, ptr_t value, size_t ordinal)
+{
+	lListNode* p = node;
+	for(size_t i = 0; i < ordinal && p != nullptr; p = p->prev)
+	{
+		if(memcmp(p->data, value, p->size) == 0)
+		{
+			i++;
+		}
+	}
+	
+	return p;
+}
+
+/* USE    : lListNode number of list
+ *
+ * PARAM  : any lListNode of list
+ *
+ * RETURN : lListNode number of list
+ */
+size_t lListCount(lListNode* node)
+{
+	size_t count = 0;
+	lListNode*p = nullptr;
+	
+	for(p = node ; p != nullptr; p = p->prev)
+	{
+		count++;
+	}
+	
+	for(p = node->next; p!= nullptr; p = p->next)
+	{
+		count++;
+	}
+	
+	return count;
+}
+
+
 

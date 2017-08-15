@@ -11,6 +11,11 @@ lList is a double-linked list.
 * [lListInsertAfter](#llistinsertafter)  
 * [lListInsertBefore](#llistinsertbefore)  
 * [lListRemove](#llistremove)  
+* [lListHead](#llisthead)
+* [lListTail](#llisttail)
+* [lListFindAfter](#llistfindafter)
+* [lListFindBefore](#llistfindbefore)
+* [lListCount](#llistcount)
 
 ## APIs
 ### lListCreateBySize
@@ -120,4 +125,66 @@ lListNode* lListInsertBefore(lListNode* node);
  * RETURN : void
  */
 void lListRemove(lListNode* node);
+```
+
+### lListHead
+```C
+/* USE    : Head of list 
+ *
+ * PARAM  : node - any lListNode of list
+ *
+ * RETURN : Head lListNode of list
+ */
+lListNode* lListHead(lListNode* node);
+```
+
+### lListTail
+```C
+/* USE    : Tail of list
+ *
+ * PARAM  : node - any lListNode of list
+ *
+ * RETURN : Tail lListNode of list
+ */
+lListNode* lListTail(lListNode* node);
+```
+
+### lListFindAfter
+```C
+/* USE    : Find a lListNode after node
+ * 
+ * PARAM  : node   - after this lListNode
+ *          value  - pointer to value
+ *          ordinal - ordinal number 
+ *
+ * RETURN : number ordinal lListNode, whose data equals to value, 
+ *          after node(inclusive) , or nullptr 
+ */
+
+lListNode* lListFindAfter(lListNode* node, ptr_t value, size_t ordinal);
+```
+
+### lListFindBefore
+```C
+/* USE    : Find a lListNode before node
+ * 
+ * PARAM  : node   - before this lListNode
+ *          value  - pointer to value
+ *          ordinal - ordinal number 
+ *
+ * RETURN : number ordinal lListNode, whose data equals to value, 
+ *          before node(inclusive) , or nullptr 
+ */
+lListNode* lListFindBefore(lListNode* node, ptr_t value, size_t ordinal);
+```
+
+### lListCount
+```C
+/* USE    : lListNode number of list
+ *
+ * PARAM  : any lListNode of list
+ *
+ * RETURN : lListNode number of list
+ */
+size_t lListCount(lListNode* node);
 ```

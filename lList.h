@@ -63,4 +63,19 @@ lListNode* lListInsertBefore(lListNode* node);
 /* Remove node */
 void lListRemove(lListNode* node);
 
+/* Head of list */
+lListNode* lListHead(lListNode* node);
+
+/* Tail of list */
+lListNode* lListTail(lListNode* node);
+
+/* Find a lListNode after node */
+lListNode* lListFindAfter(lListNode* node, ptr_t value, size_t ordinal);
+
+/* Find a lListNode before node */
+lListNode* lListFindBefore(lListNode* node, ptr_t value, size_t ordinal);
+
+/* Nodes number of list */
+size_t lListCount(lListNode* node);
+
 #endif // LUMINOUS_LIST_H
