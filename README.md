@@ -2,7 +2,7 @@
 Luminous is a DATA STRUCTURE and ALGORITHMIC library of C programming language.
 
 ## Base Types and Base Macro Definitions
-Base Types and Base Macro Definitions are defined in file lCole.h
+Base Types and Base Macro Definitions are defined in file lCore.h
 ```C
 /* If you don't want to use these types , please #define LUMINOUS_NO_TYPE */
 #ifndef LUMINOUS_NO_TYPE
