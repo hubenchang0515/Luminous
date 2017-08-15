@@ -18,7 +18,7 @@
 /* Create a lListNode , return lListNode* or nnullptr */
 static lListNode* lListCreateNodeBySize(size_t datasize)
 {
-	lListNode* node = malloc(sizeof(lListNode));
+	lListNode* node = (lListNode*)malloc(sizeof(lListNode));
 	if(node == nullptr)
 	{
 		return nullptr;
@@ -29,7 +29,7 @@ static lListNode* lListCreateNodeBySize(size_t datasize)
 	node->next = nullptr;
 	node->data = malloc(datasize);
 	
-	if(node->data == nullptr)
+	if(nullptr == node->data)
 	{
 		free(node);
 		return nullptr;
