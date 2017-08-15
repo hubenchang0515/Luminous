@@ -25,8 +25,8 @@ typedef const void* 	ptrcst_t; // pointer to const
 #endif // LUMINOUS_NO_TYPE
 
 /* Some macro definitions */
-/* If you don't want to use these macro , please #define LUMINOUS_NO_JOCK */
-#ifndef LUMINOUS_NO_JOCK
+/* If you don't want to use these macro , please #define LUMINOUS_NO_JOKE */
+#ifndef LUMINOUS_NO_JOKE
 /* nullptr */
 #	if ( !defined(__cplusplus) || __cplusplus < 201103L ) && !defined(nullptr)
 #		define nullptr ( (void*) 0 )
@@ -36,6 +36,6 @@ typedef const void* 	ptrcst_t; // pointer to const
 #		define true  1
 #		define false 0
 #	endif
-#endif // LUMINOUS_NO_JOCK
+#endif // LUMINOUS_NO_JOKE
 
 #endif // LUMINOUS_CORE_H
