@@ -66,6 +66,11 @@ int main()
 	len = lListCount(head);
 	printf("Number of nodes is %lu\n",len);
 	printf("%p %p\n",tail,lListAfter(head,len-1));
+	
+	/* Delete */
+	lListDelete(head);
+	
+	return 0;
 }
 ```
 
