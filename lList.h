@@ -13,6 +13,9 @@
 
 #include "lCore.h"
 
+#ifdef __cplusplus 
+	extern "C" {
+#endif
 
 
 /* Linked List Node */
@@ -78,5 +81,9 @@ lListNode* lListFindBefore(lListNode* node, ptr_t value, size_t ordinal);
 
 /* Nodes number of list */
 size_t lListCount(lListNode* node);
+
+#ifdef __cplusplus 
+	}
+#endif
 
 #endif // LUMINOUS_LIST_H

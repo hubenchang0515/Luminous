@@ -38,7 +38,7 @@
 #	    ifndef __cplusplus // nullptr in C 
 #           define nullptr ( (void*) 0 )
 #       elif __cplusplus < 201103L // nullptr before C++11
-            const ptr_t lnullptr((void*)0);
+            cstptr_t lnullptr((void*)0);
 #			define nullptr lnullptr
 #       endif // __ cplusplus
 #   endif // nullptr
