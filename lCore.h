@@ -34,14 +34,14 @@
 /* If you don't want to use these macro , please #define LUMINOUS_NO_JOKE */
 #ifndef LUMINOUS_NO_JOKE
 /* nullptr */
-#   ifndef nullptr
-#	    ifndef __cplusplus // nullptr in C 
-#           define nullptr ( (void*) 0 )
-#       elif __cplusplus < 201103L // nullptr before C++11
+#	ifndef nullptr
+#		ifndef __cplusplus // nullptr in C 
+#			define nullptr ( (void*) 0 )
+#		elif __cplusplus < 201103L // nullptr before C++11
 			cstptr_t lnullptr((void*)0);
 #			define nullptr lnullptr
-#       endif // __ cplusplus
-#   endif // nullptr
+#		endif // __ cplusplus
+#	endif // nullptr
 /* true and false */
 #	if !defined(__cplusplus) && !defined(true) && !defined(false) 
 #		define true  1
