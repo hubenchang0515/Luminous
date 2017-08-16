@@ -17,15 +17,15 @@
 #   ifndef __cplusplus
 #		include <stdint.h>
 #		include <stddef.h>
-    	typedef signed char 	char_t;   // signed char
-    	typedef unsigned char 	uchar_t;  // unsigned char
-        typedef int 			bool_t;   // boolean
-        typedef void*			ptr_t;    // pointer
-        typedef void* const 	cstptr_t; // const pointer
+		typedef signed char 	char_t;   // signed char
+		typedef unsigned char 	uchar_t;  // unsigned char
+		typedef int 			bool_t;   // boolean
+		typedef void*			ptr_t;    // pointer
+		typedef void* const 	cstptr_t; // const pointer
 #   else
 #		include <stdint.h>
 #		include <cstddef>
-        typedef bool            bool_t;   // boolean
+		typedef bool            bool_t;   // boolean
 #       include "lPointer.hpp"  // in C++
 #   endif // __cplusplus
 #endif // LUMINOUS_NO_TYPE
@@ -38,7 +38,7 @@
 #	    ifndef __cplusplus // nullptr in C 
 #           define nullptr ( (void*) 0 )
 #       elif __cplusplus < 201103L // nullptr before C++11
-            cstptr_t lnullptr((void*)0);
+			cstptr_t lnullptr((void*)0);
 #			define nullptr lnullptr
 #       endif // __ cplusplus
 #   endif // nullptr
