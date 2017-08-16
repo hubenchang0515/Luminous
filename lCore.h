@@ -17,14 +17,16 @@
 #   ifndef __cplusplus
 #		include <stdint.h>
 #		include <stddef.h>
-		typedef signed char 	char_t;   // signed char
-		typedef unsigned char 	uchar_t;  // unsigned char
-		typedef int 			bool_t;   // boolean
-		typedef void*			ptr_t;    // pointer
-		typedef void* const 	cstptr_t; // const pointer
+		typedef signed char     char_t;   // signed char
+		typedef unsigned char   uchar_t;  // unsigned char
+		typedef int             bool_t;   // boolean
+		typedef void*           ptr_t;    // pointer
+		typedef void* const     cstptr_t; // const pointer
 #   else
 #		include <stdint.h>
 #		include <cstddef>
+		typedef signed char     char_t;   // signed char
+		typedef unsigned char   uchar_t;  // unsigned char
 		typedef bool            bool_t;   // boolean
 #       include "lPointer.hpp"  // in C++
 #   endif // __cplusplus
