@@ -1,5 +1,5 @@
 # lList
-lList is a double-linked list.
+lList is a double-linked list. 
 
 ## Types
 ```C
