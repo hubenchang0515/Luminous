@@ -1,11 +1,42 @@
 # lList
 lList is a double-linked list.
 
+## Types
+```C
+typedef struct lListInfo  lListInfo;
+typedef struct lListInfo* lList;
+typedef struct lListNode  lListNode;
+typedef struct lListNode* lListIterator;
+
+struct lListInfo
+{
+	size_t 			datasize; // size of data
+	size_t 			length;   // length of list
+	lListIterator 	begin;    // first lListNode of list
+	lListIterator 	end;      // last lListNode of list
+};
+
+struct lListNode
+{
+	size_t      	size;  // size of data
+	lList 			list;  // double-linked list
+	lListIterator 	prev;  // previous node
+	lListIterator 	next;  // next node
+	ptr_t       	data;  // pointer to data
+};
+```
+
 ## APIs Index
+
+### Macro Difinitions
 * [lListForEach](#llistforeach)
-* [lListCreateBySize](#llistcreatebysize)  
 * [lListCreate](#llistcreate)
+
+### Functions
+* [lListCreateBySize](#llistcreatebysize)  
 * [lListDelete](#llistdelete)  
+* [lListBegin](#llistbegin)
+* [lListEnd](#llistend)
 * [lListSetValue](#llistsetvalue)  
 * [lListGetValue](#llistgetvalue)  
 * [lListAfter](#llistafter)  
@@ -27,23 +58,24 @@ lList is a double-linked list.
 int main()
 {
 	/* Create list and set value to node */
-	lListNode* node = lListCreate(char[100]);
+	lList list = lListCreate(char[100]);
+	lListIterator node = lListBegin(list);
 	printf("Data size is %lu bytes\n",node->size);
 	char hello[100] = "hello world";
 	lListSetValue(node,hello);
 	
 	/* Insert 3 node before node */
-	lListNode* head = lListInsertBefore(node);
+	lListIterator head = lListInsertBefore(node);
 	lListInsertBefore(node);
 	lListInsertBefore(node);
 	lListSetValue(head,hello);
 	
 	/* Find "hello world" */
-	lListNode* find = lListFindAfter(head,hello,1);
+	lListIterator find = lListFindAfter(head,hello,1);
 	printf("%p %p\n",head,find);
 	
 	/* Get tail node */
-	lListNode* tail = lListTail(head);
+	lListIterator tail = lListTail(head);
 	find = lListFindAfter(head,hello,2);
 	printf("%p %p %p\n",node,tail,find);
 	
@@ -53,7 +85,7 @@ int main()
 	printf("Data is \"%s\"\n",str);
 	
 	/* Get number of nodes */
-	size_t len = lListCount(head);
+	size_t len = lListCount(list);
 	printf("Number of nodes is %lu\n",len);
 	tail = lListAfter(head,len-1);
 	printf("%p %p\n",node,tail);
@@ -64,24 +96,24 @@ int main()
 	
 	/* Remove node */
 	lListRemove(node);
-	len = lListCount(head);
+	len = lListCount(list);
 	printf("Number of nodes is %lu\n",len);
 	printf("%p %p\n",tail,lListAfter(head,len-1));
 	
 	/* Traverse list */
-	lListForEach(i,head)
+	lListForEach(i,list)
 	{
 		lListSetValue(i,hello);
 	}
 	
-	lListForEach(i,head)
+	lListForEach(i,list)
 	{
 		lListGetValue(i,str);
 		printf("%s\n",str);
 	}
 	
 	/* Delete */
-	lListDelete(head);
+	lListDelete(list);
 	
 	return 0;
 }
@@ -94,12 +126,13 @@ int main()
 /*
  * USE    : Traverse list from start to the end
  *
- * PARAM  : iter  - lListNode used to traverse list
- *          start - start lListNode of list
+ * PARAM  : iter - lListIterator used to traverse list
+ *          list - lList
  */
-#define lListForEach(iter,start) \
-	for(lListNode* iter = start; iter != nullptr; iter = iter->next)
-
+#ifndef lListFor 
+#	define lListForEach(iter,list) \
+		for(lListIterator iter = list->begin; iter != nullptr; iter = iter->next)
+#endif
 ```
 
 ### lListCreateBySize
@@ -109,9 +142,9 @@ int main()
  *
  * PARAM  : datasize - size of node's data
  *
- * RETURN : head lListNode of list or nullptr
+ * RETURN : lList or nullptr
  */
-lListNode* lListCreateBySize(size_t datasize);
+lList lListCreateBySize(size_t datasize);
 ```
 
 ### lListCreate
@@ -121,7 +154,7 @@ lListNode* lListCreateBySize(size_t datasize);
  *
  * PARAM  : T - type of node's data
  *
- * RETURN : head lListNode of list or nullptr
+ * RETURN : lList or nullptr
  */
 #define lListCreate(T) lListCreateBySize(sizeof(T))
 ```
@@ -131,11 +164,33 @@ lListNode* lListCreateBySize(size_t datasize);
 /*
  * USE    : Delete linked list
  *
- * PARAM  : list - any lListNode of list
+ * PARAM  : list - lList to delete
  *
  * RETURN : void
  */
-void lListDelete(lListNode* list);
+void lListDelete(lList list);
+```
+
+### lListBegin
+```C
+/* USE    : Begin of list
+ *
+ * PARAM  : list - which list you want to get begin
+ *
+ * RETURN : lListIterator to begin lListNode of list
+ */
+lListIterator lListBegin(lList list);
+```
+
+### lListEnd
+```C
+/* USE    : End of list
+ * 
+ * PARAM  : list - which list you want to get end
+ *
+ * RETURN : lListIterator to end lListNode of list
+ */
+lListIterator lListEnd(lList list);
 ```
 
 ### lListSetValue
@@ -143,12 +198,12 @@ void lListDelete(lListNode* list);
 /*
  * USE    : Set value of node
  *
- * PARAM  : node  - lListNode to set
+ * PARAM  : node  - lListIterator to lListNode you want to set value
  *          value - pointer to value to set
  *
  * RETURN : void
  */
-void lListSetValue(lListNode* node, ptr_t value);
+void lListSetValue(lListIterator node, ptr_t value);
 ```
 
 ### lListGetValue
@@ -156,12 +211,12 @@ void lListSetValue(lListNode* node, ptr_t value);
 /*
  * USE    : Get value of node
  *
- * PARAM  : node  - lListNode to get
+ * PARAM  : node  - lListIterator to lListNode you want to get value
  *          value - pointer to return value
  *
  * RETURN : void
  */
-void lListGetValue(lListNode* node, ptr_t value);
+void lListGetValue(lListIterator node, ptr_t value);
 ```
 
 ### lListAfter
@@ -174,7 +229,7 @@ void lListGetValue(lListNode* node, ptr_t value);
  *
  * RETURN : lListNode we want or nullptr
  */
-lListNode* lListAfter(lListNode* node, size_t distance);
+lListIterator lListAfter(lListIterator node, size_t distance);
 ```
 
 ### lListBefore
@@ -182,12 +237,12 @@ lListNode* lListAfter(lListNode* node, size_t distance);
 /*
  * USE    : Get a lListNode before node
  *
- * PARAM  : node     - before lListNode
+ * PARAM  : node     - before this lListNode
  *          distance - distance to node
  *
  * RETURN : lListNode we want or nullptr
  */
-lListNode* lListBefore(lListNode* node, size_t distance);
+lListIterator lListBefore(lListIterator node, size_t distance);
 ```
 
 ### lListInsertAfter
@@ -196,9 +251,9 @@ lListNode* lListBefore(lListNode* node, size_t distance);
  *
  * PARAM  : node - after this lListNode
  *
- * RETURN : lListNode inserted or nullptr
+ * RETURN : lListIterator to lListNode inserted or nullptr
  */
-lListNode* lListInsertAfter(lListNode* node);
+lListIterator lListInsertAfter(lListIterator node);
 ```
 
 ### lListInsertBefore
@@ -207,42 +262,42 @@ lListNode* lListInsertAfter(lListNode* node);
  *
  * PARAM  : node - before this lListNode
  *
- * RETURN : lListNode inserted or nullptr
+ * RETURN : lListIterator to lListNode inserted or nullptr
  */
-lListNode* lListInsertBefore(lListNode* node);
+lListIterator lListInsertBefore(lListIterator node);
 ```
 
 ### lListRemove
 ```C
 /* USE    : Remove node 
  *
- * PARAM  : node - lListNode to remove
+ * PARAM  : node - lListIterator to lListNode you want to remove
  *
  * RETURN : void
  */
-void lListRemove(lListNode* node);
+void lListRemove(lListIterator node);
 ```
 
 ### lListHead
 ```C
 /* USE    : Head of list 
  *
- * PARAM  : node - any lListNode of list
+ * PARAM  : node - lListIterator to any lListNode of list
  *
  * RETURN : Head lListNode of list
  */
-lListNode* lListHead(lListNode* node);
+lListIterator lListHead(lListIterator node);
 ```
 
 ### lListTail
 ```C
 /* USE    : Tail of list
  *
- * PARAM  : node - any lListNode of list
+ * PARAM  : node - lListIterator to any lListNode of list
  *
  * RETURN : Tail lListNode of list
  */
-lListNode* lListTail(lListNode* node);
+lListIterator lListTail(lListIterator node);
 ```
 
 ### lListFindAfter
@@ -257,7 +312,7 @@ lListNode* lListTail(lListNode* node);
  *          after node(inclusive) , or nullptr 
  */
 
-lListNode* lListFindAfter(lListNode* node, ptr_t value, size_t ordinal);
+lListIterator lListFindAfter(lListIterator node, ptr_t value, size_t ordinal);
 ```
 
 ### lListFindBefore
@@ -271,16 +326,18 @@ lListNode* lListFindAfter(lListNode* node, ptr_t value, size_t ordinal);
  * RETURN : number ordinal lListNode, whose data equals to value, 
  *          before node(inclusive) , or nullptr 
  */
-lListNode* lListFindBefore(lListNode* node, ptr_t value, size_t ordinal);
+lListIterator lListFindBefore(lListIterator node, ptr_t value, size_t ordinal);
 ```
 
 ### lListCount
 ```C
 /* USE    : lListNode number of list
  *
- * PARAM  : any lListNode of list
+ * PARAM  : lList
  *
  * RETURN : lListNode number of list
  */
-size_t lListCount(lListNode* node);
+size_t lListCount(lList list);
 ```
+
+
