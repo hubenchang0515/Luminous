@@ -14,7 +14,7 @@
 /* Base Types , use stdint.h and srddef.h */
 /* If you don't want to use these types , please #define LUMINOUS_NO_TYPE */
 #ifndef LUMINOUS_NO_TYPE
-#   ifndef __cplusplus
+#	ifndef __cplusplus
 #		include <stdint.h>
 #		include <stddef.h>
 		typedef signed char     char_t;   // signed char
@@ -22,14 +22,14 @@
 		typedef int             bool_t;   // boolean
 		typedef void*           ptr_t;    // pointer
 		typedef void* const     cstptr_t; // const pointer
-#   else
+#	else
 #		include <stdint.h>
 #		include <cstddef>
 		typedef signed char     char_t;   // signed char
 		typedef unsigned char   uchar_t;  // unsigned char
 		typedef bool            bool_t;   // boolean
 #		include "lPointer.hpp"  // in C++
-#   endif // __cplusplus
+#	endif // __cplusplus
 #endif // LUMINOUS_NO_TYPE
 
 /* Some macro definitions */
