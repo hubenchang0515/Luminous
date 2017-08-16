@@ -10,19 +10,19 @@ typedef struct lListNode* lListIterator;
 
 struct lListInfo
 {
-	size_t 			datasize; // size of data
-	size_t 			length;   // length of list
-	lListIterator 	begin;    // first lListNode of list
-	lListIterator 	end;      // last lListNode of list
+	size_t          datasize; // size of data
+	size_t          length;   // length of list
+	lListIterator   begin;    // first lListNode of list
+	lListIterator   end;      // last lListNode of list
 };
 
 struct lListNode
 {
-	size_t      	size;  // size of data
-	lList 			list;  // double-linked list
-	lListIterator 	prev;  // previous node
-	lListIterator 	next;  // next node
-	ptr_t       	data;  // pointer to data
+	size_t          size;  // size of data
+	lList           list;  // double-linked list
+	lListIterator   prev;  // previous node
+	lListIterator   next;  // next node
+	ptr_t           data;  // pointer to data
 };
 ```
 
