@@ -1,4 +1,4 @@
-/* lPointer.hpp - Pointer
+/* lPointer.hpp - Pointer in C++
 ** https://github.com/hubenchang0515/Luminous
 **
 ** Copyright (C) 2017 hubenchang0515
@@ -15,34 +15,73 @@
 class ptr_t
 {
 public:
-	/* Create by any kind of pointer */
+	/* Convert from any kind of pointer */
 	template<typename T>
-	ptr_t(T* ptr) : addr(ptr) {}
+	ptr_t(T ptr)
+	{
+		this->addr = static_cast<void*>(ptr);
+	}
 	
-	/* Transport to any kind of pointer */
 	template<typename T>
-	operator T*() const { return static_cast<T*>(addr); }
-
-	/* Assign by any kind of pointer */
+	ptr_t& operator = (T* ptr) 
+	{ 
+		this->addr = static_cast<void*>(ptr);
+		return *this; 
+	}
+	
+	
+	/* Convert to any kind of pointer */
 	template<typename T>
-	ptr_t& operator = (T* ptr) { this->addr = static_cast<void*>(ptr); return *this; }
+	operator T*() const 
+	{ 
+		return static_cast<T*>(addr); 
+	}
 
-	/* Compare with class can be tranported to void* */
-	bool operator == (ptr_t another) const { return addr == another.addr; }
-	bool operator != (ptr_t another) const { return addr != another.addr; }
 
-	/* Compare with nullptr in C++11 */
-#if __cplusplus >= 201103L  // C++11
-	friend bool operator == (ptr_t self, std::nullptr_t ptr) { return self.addr == ptr; }
-	friend bool operator == (std::nullptr_t ptr, ptr_t self) { return self.addr == ptr; }
-	friend bool operator != (ptr_t self, std::nullptr_t ptr) { return self.addr != ptr; }
-	friend bool operator != (std::nullptr_t ptr, ptr_t self) { return self.addr != ptr; }
-#endif // C++11
+	/* Compare with other ptr_t */
+	friend bool operator == (ptr_t one, ptr_t another) 
+	{ 
+		return one.addr == another.addr; 
+	}
+	
+	friend bool operator != (ptr_t one, ptr_t another) 
+	{ 
+		return one.addr != another.addr; 
+	}
+
+
+	/* Compare with other type can be converted to void* */
+	template<typename T>
+	friend bool operator == (ptr_t self,T ptr) 
+	{ 
+		return self.addr == static_cast<void*>(ptr); 
+	}
+	
+	template<typename T>
+	friend bool operator != (ptr_t self, T ptr) 
+	{ 
+		return self.addr != static_cast<void*>(ptr); 
+	}
+	
+	template<typename T>
+	friend bool operator == (T ptr, ptr_t self) 
+	{ 
+		return self.addr == static_cast<void*>(ptr); 
+	}
+	
+	template<typename T>
+	friend bool operator != (T ptr, ptr_t self) 
+	{ 
+		return self.addr != static_cast<void*>(ptr); 
+	}
+
 
 private:
 	void* addr;
 };
 
 /* Const Pointer */
-typedef const ptr_t cstptr_t;   
+typedef const ptr_t cstptr_t;  
+ 
 #endif // LUMINOUS_POINTER_HPP
+
