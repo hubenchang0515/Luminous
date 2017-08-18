@@ -104,6 +104,27 @@ lListIterator lListFindBefore(lListIterator node, ptr_t value, size_t ordinal);
 /* Nodes number of list */
 size_t lListCount(lList node);
 
+/* check list if empty  */
+bool_t lListIsEmpty(lList list);
+
+/* Insert a lListNode after end */
+lListIterator lListPushBack(lList list, ptr_t value);
+
+/* Insert a lListNode before begin */
+lListIterator lListPushFront(lList list, ptr_t value);
+
+/* Remove end lListNode */
+void lListPopBack(lList list);
+
+/* Remove begin lListNode */
+void lListPopFront(lList list);
+
+/* Get lListNode from begin */
+lListIterator lListIndexAt(lList list, size_t ordinal);
+
+/* Get lListNode from end */
+lListIterator lListInverseAt(lList list, size_t ordinal);
+
 #ifdef __cplusplus 
 	}
 #endif

@@ -10,6 +10,7 @@
 
 #include <stdlib.h>
 #include <string.h>
+#include <assert.h>
 #include "lList.h"
 
 /* WARNING : This is a UB(Undefined Behavior) */
@@ -55,16 +56,10 @@ lList lListCreateBySize(size_t datasize)
 		return nullptr;
 	}
 	
-	list->begin = lListCreateNodeBySize(datasize);
-	list->begin->list = list;
-	if(list->begin == nullptr)
-	{
-		free(list);
-		return nullptr;
-	}
-	
-	list->end = list->begin;
-	list->length = 1;
+	list->datasize = datasize;
+	list->begin = nullptr;
+	list->end = nullptr;
+	list->length = 0;
 	return list;
 }
 
@@ -287,19 +282,25 @@ void lListRemove(lListIterator node)
 	{
 		node->list->end = node->prev;
 	}
+	else // 
+	{
+		node->next->prev = node->prev;
+	}
 	
 	/* update begin of list */
 	if(node->prev == nullptr)
 	{
 		node->list->begin = node->next;
 	}
+	else
+	{
+		node->prev->next = node->next;
+	}
 	
 	/* update length of list */
 	node->list->length -= 1;
 	
 	/* remove */
-	node->prev->next = node->next;
-	node->next->prev = node->prev;
 	free(node->data);
 	free(node);
 	
@@ -401,5 +402,153 @@ size_t lListCount(lList list)
 	return list->length;
 }
 
+
+
+/* USE    : check list if empty 
+ *
+ * PARAM  : list - lList you want to check
+ *
+ * RETURN : true of false
+ */
+bool_t lListIsEmpty(lList list)
+{
+	return list->length == 0 ? true : false;
+}
+
+
+
+/* USE    : Insert a lListNode after end
+ *
+ * PARAM  : list  - lList you want to insert
+ *          value - value you want to insert
+ *
+ * RETURN : lListIterator to lListNode inserted or nullptr
+ */
+lListIterator lListPushBack(lList list, ptr_t value)
+{
+	lListIterator p = list->end;
+	if(p != nullptr)
+	{
+		p = lListInsertAfter(p);
+		if(p != nullptr)
+		{
+			lListSetValue(p,value);
+		}
+	}
+	else // list is empty
+	{
+		assert(list->begin == nullptr); // list is empty
+		
+		/* Create first node */
+		p = lListCreateNodeBySize(list->datasize);
+		if(p != nullptr)
+		{
+			p->list = list;
+			list->begin = p;
+			list->end = p;
+			list->length = 1;
+			lListSetValue(p,value);
+		}
+	}
+	
+	return p;
+}
+
+
+
+/* USE    : Insert a lListNode before begin
+ *
+ * PARAM  : list  - lList you want to insert
+ *          value - value you want to insert
+ *
+ * RETURN : lListIterator to lListNode inserted or nullptr
+ */
+lListIterator lListPushFront(lList list, ptr_t value)
+{
+	lListIterator p = list->begin;
+	if(p != nullptr)
+	{
+		p = lListInsertAfter(p);
+		if(p != nullptr)
+		{
+			lListSetValue(p,value);
+		}
+	}
+	else // list is empty
+	{
+		assert(list->end == nullptr); // list is empty
+		
+		/* Create first node */
+		p = lListCreateNodeBySize(list->datasize);
+		if(p != nullptr)
+		{
+			p->list = list;
+			list->begin = p;
+			list->end = p;
+			list->length = 1;
+			lListSetValue(p,value);
+		}
+	}
+	
+	return p;
+}
+
+
+
+/* USE    : Remove end lListNode
+ *
+ * PARAM  : list - list you want to remove end
+ *
+ * RETURN : void
+ */
+void lListPopBack(lList list)
+{
+	if(list->end != nullptr)
+	{
+		lListRemove(list->end);
+	}
+}
+
+/* USE    : Remove begin lListNode
+ *
+ * PARAM  : list - list you want to remove end
+ *
+ * RETURN : void
+ */
+void lListPopFront(lList list)
+{
+	if(list->begin != nullptr)
+	{
+		lListRemove(list->begin);
+	}
+}
+
+
+
+/* USE    : Get lListNode from begin
+ *
+ * PARAM  : list    - which list you want to get lListNode
+ *          ordinal - ordinal to begin
+ *
+ * RETURN : lListIterator or nullptr
+ */
+lListIterator lListIndexAt(lList list, size_t ordinal)
+{
+	return lListAfter(list->begin, ordinal);
+}
+
+
+
+/* USE    : Get lListNode from end
+ *
+ * PARAM  : list    - which list you want to get lListNode
+ *          ordinal - ordinal to end
+ *
+ * RETURN : lListIterator or nullptr
+ */
+lListIterator lListInverseAt(lList list, size_t ordinal)
+{
+	return lListBefore(list->end, ordinal);
+}
 
 
