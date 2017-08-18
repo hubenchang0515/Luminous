@@ -39,6 +39,7 @@ struct lListNode
 * [lListEnd](#llistend)
 * [lListSetValue](#llistsetvalue)  
 * [lListGetValue](#llistgetvalue)  
+* [lListGetDataPointer](#llistgetdatapointer)
 * [lListAfter](#llistafter)  
 * [lListBefore](#llistbefore)  
 * [lListInsertAfter](#llistinsertafter)  
@@ -217,6 +218,18 @@ void lListSetValue(lListIterator node, ptr_t value);
  * RETURN : void
  */
 void lListGetValue(lListIterator node, ptr_t value);
+```
+
+### lListGetDataPointer
+```C
+/*
+ * USE    : Get pointer to data
+ *
+ * PARAM  : node - lListIterator to lListNode you want to get 
+ * 
+ * RETURN : pointer to data
+ */
+ptr_t lListGetDataPointer(lListIterator node);
 ```
 
 ### lListAfter

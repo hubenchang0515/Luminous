@@ -71,6 +71,9 @@ void lListSetValue(lListIterator node, ptr_t value);
 /* Get value of node */
 void lListGetValue(lListIterator node, ptr_t value);
 
+/* Get pointer to data */
+ptr_t lListGetDataPointer(lListIterator node);
+
 /* Get a lListNode after node */
 lListIterator lListAfter(lListIterator node, size_t distance);
 

@@ -147,6 +147,20 @@ void lListGetValue(lListIterator node, ptr_t value)
 
 
 /*
+ * USE    : Get pointer to data
+ *
+ * PARAM  : node - lListIterator to lListNode you want to get 
+ * 
+ * RETURN : pointer to data
+ */
+ptr_t lListGetDataPointer(lListIterator node)
+{
+	return node->data;
+}
+
+
+
+/*
  * USE    : Get a lListNode after node
  *
  * PARAM  : node     - after this lListNode
