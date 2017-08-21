@@ -36,6 +36,51 @@ struct lVectorInfo
 * [lVectorGetDataPointer](#lvectorgetdatapointer)
 
 ## Demo
+```C
+#include <stdio.h>
+#include "lVector.h"
+
+int main()
+{
+	/* Create lVector */
+	lVector vector = lVectorCreate(char[32]);
+	
+	/* Push 10 data to the vector */
+	char str[32];	
+	for(size_t i = 0; i < 10; i++)
+	{
+		sprintf(str,"string %lu",i);
+		lVectorPushBack(vector,str);
+	}
+	
+	/* Remove 2 5 7 */
+	lVectorRemove(vector,7);
+	lVectorRemove(vector,5);
+	lVectorRemove(vector,2);
+	
+	/* Set Value of 3 */
+	sprintf(str,"string 3 set");
+	lVectorSetValue(vector,2,str);
+	
+	/* Traverse */
+	lVectorForEach(i,vector)
+	{
+		printf("%s\n",(char*)i);
+	}
+	
+	/* Length */
+	printf("Space : %lu\n",lVectorSpace(vector));
+	printf("Used  : %lu\n",lVectorLength(vector));
+	
+	/* Remove unused space */
+	lVectorReduce(vector);
+	printf("Space : %lu\n",lVectorSpace(vector));
+
+	/* Delete */
+	lVectorDelete(vector);
+	return 0;
+}
+```
 
 ## APIs
 
@@ -43,7 +88,7 @@ struct lVectorInfo
 ```C
 /*
  * USE    : Traverse vector from start to the end
- *
+ * 
  * PARAM  : iter   - ptr_t to a data
  *          vector - lVector
  */

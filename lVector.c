@@ -303,6 +303,6 @@ ptr_t lVectorGetDataPointer(lVector vector,size_t site)
     else
     {
         ptr_t node = vector->data + vector->size * site;
-        return nodel
+        return node;
     }
 }

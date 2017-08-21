@@ -31,5 +31,5 @@ which is included by all source files in this project.
 
 
 ## Document
-[lList : A double-linked list](doc/lList.md)  
+[lList   : A double-linked list](doc/lList.md)  
 [lVector : A sequence list](doc/lVector.md)  
