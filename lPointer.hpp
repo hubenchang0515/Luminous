@@ -40,7 +40,7 @@ public:
 		return static_cast<T*>(addr); 
 	}
 
-	/* Pointer +  */
+	/* Pointer + - */
 	ptr_t operator + (ptrdiff_t n)
 	{
 		uint8_t* p = static_cast<uint8_t*>(this->addr);
@@ -48,12 +48,25 @@ public:
 		return static_cast<ptr_t>(p);
 	}
 
-	/* Pointer - */
 	ptr_t operator - (ptrdiff_t n)
 	{
 		uint8_t* p = static_cast<uint8_t*>(this->addr);
 		p -= n;
 		return static_cast<ptr_t>(p);
+	}
+
+	ptr_t& operator += (ptrdiff_t n)
+	{
+		uint8_t* p = static_cast<uint8_t*>(this->addr);
+		this->addr = static_cast<void*>(p + n);
+		return *this;
+	}
+
+	ptr_t& operator -= (ptrdiff_t n)
+	{
+		uint8_t* p = static_cast<uint8_t*>(this->addr);
+		this->addr = static_cast<void*>(p - n);
+		return *this;
 	}
 
 	/* Compare with other ptr_t */
@@ -65,6 +78,26 @@ public:
 	friend bool operator != (ptr_t one, ptr_t another) 
 	{ 
 		return one.addr != another.addr; 
+	}
+
+	friend bool operator > (ptr_t one, ptr_t another) 
+	{ 
+		return one.addr > another.addr; 
+	}
+	
+	friend bool operator < (ptr_t one, ptr_t another) 
+	{ 
+		return one.addr < another.addr; 
+	}
+
+	friend bool operator >= (ptr_t one, ptr_t another) 
+	{ 
+		return one.addr >= another.addr; 
+	}
+	
+	friend bool operator <= (ptr_t one, ptr_t another) 
+	{ 
+		return one.addr <= another.addr; 
 	}
 
 	/* Compare with other type can be converted to void* */
@@ -91,7 +124,54 @@ public:
 	{ 
 		return self.addr != static_cast<void*>(ptr); 
 	}
-
+	// ptr_t  > < >= <=  T
+	template<typename T>
+	friend bool operator > (ptr_t self,T ptr) 
+	{ 
+		return self.addr > static_cast<void*>(ptr); 
+	}
+	
+	template<typename T>
+	friend bool operator < (ptr_t self, T ptr) 
+	{ 
+		return self.addr < static_cast<void*>(ptr); 
+	}
+	
+	template<typename T>
+	friend bool operator >= (ptr_t self,T ptr) 
+	{ 
+		return self.addr >= static_cast<void*>(ptr); 
+	}
+	
+	template<typename T>
+	friend bool operator <= (ptr_t self, T ptr) 
+	{ 
+		return self.addr <= static_cast<void*>(ptr); 
+	}
+	// T > < >= <= ptr_t
+		template<typename T>
+	friend bool operator > (T ptr, ptr_t self) 
+	{ 
+		return  static_cast<void*>(ptr) > self.addr; 
+	}
+	
+	template<typename T>
+	friend bool operator < (T ptr, ptr_t self) 
+	{ 
+		return static_cast<void*>(ptr) < self.addr; 
+	}
+	
+	template<typename T>
+	friend bool operator >= (T ptr, ptr_t self) 
+	{ 
+		return static_cast<void*>(ptr) >= self.addr; 
+	}
+	
+	template<typename T>
+	friend bool operator <= (T ptr, ptr_t self) 
+	{ 
+		return static_cast<void*>(ptr) <= self.addr; 
+	}
 
 private:
 	void* addr;

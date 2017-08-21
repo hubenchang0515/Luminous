@@ -298,7 +298,7 @@ ptr_t lVectorGetDataPointer(lVector vector,size_t site)
 {
     if(site >= vector->used)
     {
-        return false;
+        return nullptr;
     }
     else
     {
