@@ -265,6 +265,8 @@ bool_t lVectorGetValue(lVector vector, size_t site, ptr_t value);
  *
  * PARAM  : vector - lVector to get
  *          site   - site of data , interval [0 , vector->used)
+ *
+ * RETURN : ptr_t to a data or nullptr
  */
 ptr_t lVectorGetDataPointer(lVector vector,size_t site);
 ```
