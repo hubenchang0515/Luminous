@@ -7,8 +7,8 @@ typedef struct lVectorInfo* lVector;
 
 struct lVectorInfo
 {
-    size_t datasize;  // size of one data
-    size_t length;    // length of vector
+    size_t size;      // size of one data
+    size_t space;     // space of vector
     size_t used;      // length of used elements
     ptr_t  data;      // pointer to first data
 };
@@ -18,18 +18,42 @@ struct lVectorInfo
 
 ### Macro Difinitions
 * [lVectorForEach](#lvectorforeach)
-* [lVectorCreate](#lvectorcreatebysize)
+* [lVectorCreate](#lvectorcreate)
 
 ### Functions
 * [lVectorCreateBySize](#lvectorcreatebysize)
 * [lVectorDelete](#lvectordelete)
 * [lVectorIncrease](#lvectorincrease)
+* [lVectorReduce](#lvectorreduce)
+* [lVectorLength](#lvectorlength)
+* [lVectorSpace](#lvectorspace)
+* [lVectorPushBack](#lvectorpushback)
+* [lVectorPopBack](#lvectorpopback)
+* [lVectorInsert](#lvectorinsert)
+* [lVectorRemove](#lvectorremove)
+* [lVectorSetValue](#lvectorsetvalue)
+* [lVectorGetValue](#lvectorgetvalue)
+* [lVectorGetDataPointer](#lvectorgetdatapointer)
 
 ## Demo
 
 ## APIs
 
-#### lVectorCreateBySize
+### lVectorForEach
+```C
+/*
+ * USE    : Traverse vector from start to the end
+ *
+ * PARAM  : iter   - ptr_t to a data
+ *          vector - lVector
+ */
+#define lVectorForEach(iter,vector) \
+    for(ptr_t iter =  vector->data ; \
+        iter < vector->data + vector->size * vector->used; \
+        iter += vector->size)
+```
+
+### lVectorCreateBySize
 ```C
 /*
  * USE    : Create lVector by size of data
@@ -41,7 +65,19 @@ struct lVectorInfo
 lVector lVectorCreateBySize(size_t size);
 ```
 
-#### lVectorDelete
+### lVectorCreate
+```C
+/*
+ * USE    : Create lVector by size of data
+ *
+ * PARAM  : T - type of data
+ *
+ * RETURN : lVector or nullptr
+ */
+#define lVectorCreate(T) lVectorCreateBySize(sizeof(T))
+```
+
+### lVectorDelete
 ```C
 /*
  * USE    : Delete Vector
@@ -54,7 +90,7 @@ void lVectorDelete(lVector vector);
 ```
 
 
-#### lVectorIncrease
+### lVectorIncrease
 ```C
 /*
  * USE    : Increase length of vector
@@ -64,4 +100,126 @@ void lVectorDelete(lVector vector);
  * RETURN : true or false
  */
 bool_t lVectorIncrease(lVector vector);
+```
+
+### lVectorReduce
+```C
+/*
+ * USE    : Reduce space of vector to used
+ *
+ * PARAM  : vector - lVector you want to reduce
+ *
+ * RETURN : void
+ */
+void lVectorReduce(lVector vector);
+```
+
+### lVectorLength
+```C
+/*
+ * USE    : Return length of vector
+ *
+ * PARAM  : vector - whose length you want 
+ *
+ * RETURN : length of vector
+ */
+size_t lVectorLength(lVector vector);
+```
+
+### lVectorSpace
+```C
+/*
+ * USE    : Return space of vector
+ *
+ * PARAM  : vector - whose space you want
+ *
+ * RETURN : space of vector
+ */
+size_t lVectorSpace(lVector vector);
+```
+
+### lVectorPushBack
+```C
+/*
+ * USE    : Insert data after end
+ *
+ * PARAM  : vector - lVector to insert
+ *          value  - value to insert
+ *
+ * RETURN : true of false
+ */
+bool_t lVectorPushBack(lVector vector, ptr_t value);
+```
+
+### lVectorPopBack
+```C
+/*
+ * USE    : Remove the last data
+ *
+ * PARAM  : vector - lVector to remove data
+ *
+ * RETURN : true or false
+ */
+bool_t lVectorPopBack(lVector vector);
+```
+
+### lVectorInsert
+```C
+/* USE    : Insert data
+ *
+ * PARAM  : vector - lVector to insert
+ *          site   - site of data , interval [0 , vector->used]
+ *          value  - value of data
+ *
+ * RETURN : ture or false
+ */
+bool_t lVectorInsert(lVector vector, size_t site, ptr_t value);
+```
+
+### lVectorRemove
+```C
+/* USE    : Remove data
+ *
+ * PARAM  : vector - lVector to remove
+ *          site   - site of data , interval [0 , vector->used)
+ *
+ * RETURN : true or false
+ */
+bool_t lVectorRemove(lVector vector, size_t site);
+```
+
+### lVectorSetValue
+```C
+/* USE    : Set value
+ *
+ * PARAM  : vector - lVector to set value
+ *          site   - site of data , interval [0 , vector->used)
+ *          value  - value of data
+ *
+ * RETURN : true or false
+ */
+bool_t lVectorSetValue(lVector vector, size_t site, ptr_t value);
+```
+
+### lVectorGetValue
+```C
+/* USE    : Get value
+ *
+ * PARAM  : vector - lVector to get value
+ *          site   - site of data , interval [0 , vector->used)
+ *          value  - value of data
+ *
+ * RETURN : true or false
+ */
+bool_t lVectorGetValue(lVector vector, size_t site, ptr_t value);
+```
+
+### lVectorGetDataPointer
+```C
+/* USE    : Get pointer to a data
+ *
+ * PARAM  : vector - lVector to get
+ *          site   - site of data , interval [0 , vector->used)
+ */
+ptr_t lVectorGetDataPointer(lVector vector,size_t site);
 ```

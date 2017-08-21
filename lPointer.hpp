@@ -11,6 +11,9 @@
 #ifndef LUMINOUS_POINTER_HPP
 #define LUMINOUS_POINTER_HPP
 
+#include <stdint.h>
+#include <cstddef>
+
 /* Pointer */
 class ptr_t
 {
@@ -37,6 +40,21 @@ public:
 		return static_cast<T*>(addr); 
 	}
 
+	/* Pointer +  */
+	ptr_t operator + (ptrdiff_t n)
+	{
+		uint8_t* p = static_cast<uint8_t*>(this->addr);
+		p += n;
+		return static_cast<ptr_t>(p);
+	}
+
+	/* Pointer - */
+	ptr_t operator - (ptrdiff_t n)
+	{
+		uint8_t* p = static_cast<uint8_t*>(this->addr);
+		p -= n;
+		return static_cast<ptr_t>(p);
+	}
 
 	/* Compare with other ptr_t */
 	friend bool operator == (ptr_t one, ptr_t another) 
@@ -48,7 +66,6 @@ public:
 	{ 
 		return one.addr != another.addr; 
 	}
-
 
 	/* Compare with other type can be converted to void* */
 	template<typename T>
