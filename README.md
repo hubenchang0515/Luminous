@@ -32,3 +32,4 @@ which is included by all source files in this project.
 ## Document
 [lList](doc/lList.md) : A double-linked list    
 [lVector](doc/lVector.md) : A sequence list
+[lString](doc/lString.md) : A incomplete string
