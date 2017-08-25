@@ -79,7 +79,7 @@ size_t lStringLength(lString string)
  */
 bool_t lStringResize(lString string, size_t size)
 {
-    char* p = realloc(string->data,size + 1);
+    char* p = (char*)realloc((void*)string->data,size + 1);
     if(p != nullptr)
     {
         string->space = size;
@@ -102,7 +102,7 @@ bool_t lStringResize(lString string, size_t size)
  */
 void lStringReduce(lString string)
 {
-    string->data = realloc(string->data, strlen(string->data) + 1);
+    string->data = (char*)realloc((void*)string->data, strlen(string->data) + 1);
 }
 
 
