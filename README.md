@@ -20,7 +20,6 @@ which is included by all source files in this project.
 	typedef void* const     cstptr_t; // const pointer
 #endif // LUMINOUS_NO_TYPE
 
-/* Some macro definitions */
 /* If you don't want to use these macro , please #define LUMINOUS_NO_JOKE */
 #ifndef LUMINOUS_NO_JOKE
 #	define nullptr ((void*)0)
