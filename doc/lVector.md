@@ -27,6 +27,7 @@ struct lVectorInfo
 * [lVectorReduce](#lvectorreduce)
 * [lVectorLength](#lvectorlength)
 * [lVectorSpace](#lvectorspace)
+* [lVectorResize](#lvectorresize)
 * [lVectorPushBack](#lvectorpushback)
 * [lVectorPopBack](#lvectorpopback)
 * [lVectorInsert](#lvectorinsert)
@@ -181,6 +182,19 @@ size_t lVectorLength(lVector vector);
  * RETURN : space of vector
  */
 size_t lVectorSpace(lVector vector);
+```
+
+### lVectorResize
+```C
+/* 
+ * USE    : Resize the space of vector
+ *
+ * PARAM  : vector - lVector to resize space
+ *          space  - the new space
+ *
+ * RETURN : true or false
+ */
+bool_t lVectorResize(lVector vector, size_t space);
 ```
 
 ### lVectorPushBack

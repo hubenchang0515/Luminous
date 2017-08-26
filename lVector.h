@@ -58,6 +58,9 @@ size_t lVectorLength(lVector vector);
 /* Space of vector */
 size_t lVectorSpace(lVector vector);
 
+/* Resize the space of vector */
+bool_t lVectorResize(lVector vector, size_t space);
+
 /* Insert data at end */
 bool_t lVectorPushBack(lVector vector, ptr_t value);
 

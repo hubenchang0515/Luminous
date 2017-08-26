@@ -134,6 +134,32 @@ size_t lVectorSpace(lVector vector)
 
 
 
+/* 
+ * USE    : Resize the space of vector
+ *
+ * PARAM  : vector - lVector to resize space
+ *          space  - the new space
+ *
+ * RETURN : true or false
+ */
+bool_t lVectorResize(lVector vector, size_t space)
+{
+    ptr_t data = realloc(vector->data ,space * vector->size);
+    if(data == nullptr)
+    {
+        return false;
+    }
+    if(space < vector->used)
+    {
+        vector->used = space;
+    }
+	vector->data = data;
+    vector->space = space;
+    return true;
+}
+
+
+
 /*
  * USE    : Insert data after end
  *
