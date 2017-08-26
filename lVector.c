@@ -29,7 +29,7 @@ lVector lVectorCreateBySize(size_t size)
 
     vector->space = 0;
     vector->used = 0;
-    vector->size = size;
+    vector->itemsize = size;
     vector->data = nullptr;
 
     return vector;
@@ -78,7 +78,7 @@ bool_t lVectorIncrease(lVector vector)
     }
     
     /* Reallocate memory of vector->data */
-    ptr_t data = realloc(vector->data ,space * vector->size);
+    ptr_t data = realloc(vector->data ,space * vector->itemsize);
     if(data == nullptr)
     {
         return false;
@@ -144,7 +144,7 @@ size_t lVectorSpace(lVector vector)
  */
 bool_t lVectorResize(lVector vector, size_t space)
 {
-    ptr_t data = realloc(vector->data ,space * vector->size);
+    ptr_t data = realloc(vector->data ,space * vector->itemsize);
     if(data == nullptr)
     {
         return false;
@@ -172,8 +172,8 @@ bool_t lVectorPushBack(lVector vector, ptr_t value)
 {
     if(vector->used < vector->space || lVectorIncrease(vector))
     {
-        ptr_t site = vector->data + vector->used * vector->size;
-        memcpy(site,value,vector->size);
+        ptr_t site = vector->data + vector->used * vector->itemsize;
+        memcpy(site,value,vector->itemsize);
         vector->used += 1;
         return true;
     }
@@ -226,11 +226,11 @@ bool_t lVectorInsert(lVector vector, size_t site, ptr_t value)
     }
     else if(vector->used < vector->space || lVectorIncrease(vector))
     {
-        size_t size = (vector->used - site) * vector->size;
-        ptr_t  src = vector->data + site * vector->size;
-        ptr_t  dst = vector->data + (site + 1) * vector->size;
+        size_t size = (vector->used - site) * vector->itemsize;
+        ptr_t  src = vector->data + site * vector->itemsize;
+        ptr_t  dst = vector->data + (site + 1) * vector->itemsize;
         memmove(dst,src,size);
-        memcpy(src,value,vector->size);
+        memcpy(src,value,vector->itemsize);
         vector->used += 1;
         return true;
     }
@@ -253,9 +253,9 @@ bool_t lVectorRemove(lVector vector, size_t site)
 {
     if(site < vector->used)
     {
-        size_t size = (vector->used - site) * vector->size;
-        ptr_t  src = vector->data + (site + 1) * vector->size;
-        ptr_t  dst = vector->data + site * vector->size;
+        size_t size = (vector->used - site) * vector->itemsize;
+        ptr_t  src = vector->data + (site + 1) * vector->itemsize;
+        ptr_t  dst = vector->data + site * vector->itemsize;
         memmove(dst,src,size);
         vector->used -= 1;
 
@@ -285,8 +285,8 @@ bool_t lVectorSetValue(lVector vector, size_t site, ptr_t value)
     }
     else
     {
-        ptr_t node = vector->data + vector->size * site;
-        memcpy(node,value,vector->size);
+        ptr_t node = vector->data + vector->itemsize * site;
+        memcpy(node,value,vector->itemsize);
         return true;
     }
 }
@@ -307,8 +307,8 @@ bool_t lVectorGetValue(lVector vector, size_t site, ptr_t value)
     }
     else
     {
-        ptr_t node = vector->data + vector->size * site;
-        memcpy(value,node,vector->size);
+        ptr_t node = vector->data + vector->itemsize * site;
+        memcpy(value,node,vector->itemsize);
         return true;
     }
 }
@@ -330,7 +330,7 @@ ptr_t lVectorGetDataPointer(lVector vector,size_t site)
     }
     else
     {
-        ptr_t node = vector->data + vector->size * site;
+        ptr_t node = vector->data + vector->itemsize * site;
         return node;
     }
 }

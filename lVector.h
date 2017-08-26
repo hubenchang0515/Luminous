@@ -22,7 +22,7 @@ typedef struct lVectorInfo lVectorInfo;
 
 struct lVectorInfo
 {
-    size_t size;      // size of one data
+    size_t itemsize;  // size of one item
     size_t space;     // space of vector
     size_t used;      // length of used elements
     ptr_t  data;      // pointer to first data
@@ -33,8 +33,8 @@ struct lVectorInfo
 #ifndef lVectorForEach
 #   define lVectorForEach(iter,vector) \
         for(ptr_t iter =  vector->data ; \
-             iter < vector->data + vector->size * vector->used; \
-             iter += vector->size)
+             iter < vector->data + vector->itemsize * vector->used; \
+             iter += vector->itemsize)
 #endif // lVectorForEach
 
 /* Create vector */
