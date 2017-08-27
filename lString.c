@@ -19,13 +19,13 @@
  *
  * RETURN : lString of nullptr
  */
-lString lStringCreate(const char* cstr)
+lString lStringCreate(const char_t* cstr)
 {
     lString string = (lString)malloc(sizeof(lStringInfo));
     if(string != nullptr)
     {
         string->space  = strlen(cstr);  
-        string->data   = (char*)malloc(string->space + 1);// also  end of 0
+        string->data   = (char_t*)malloc(string->space + 1);// also  end of 0
 
         if(string->data == nullptr)
         {
@@ -79,7 +79,7 @@ size_t lStringLength(lString string)
  */
 bool_t lStringResize(lString string, size_t size)
 {
-    char* p = (char*)realloc((void*)string->data,size + 1);
+    char_t* p = (char_t*)realloc((void*)string->data,size + 1);
     if(p != nullptr)
     {
         string->space = size;
@@ -102,7 +102,7 @@ bool_t lStringResize(lString string, size_t size)
  */
 void lStringReduce(lString string)
 {
-    string->data = (char*)realloc((void*)string->data, strlen(string->data) + 1);
+    string->data = (char_t*)realloc((void*)string->data, strlen(string->data) + 1);
 }
 
 
@@ -124,11 +124,11 @@ lString lStringCopy(lString string)
  *
  * PARAM  : string - lString to get value
  *
- * RETURN : const char* to data
+ * RETURN : const char_t* to data
  */
-const char* lStringValue(lString string)
+const char_t* lStringValue(lString string)
 {
-    const char* data = string->data;
+    const char_t* data = string->data;
     return data;
 }
 
@@ -138,11 +138,11 @@ const char* lStringValue(lString string)
  *
  * PARAM  : string - lString - lString to get data
  *
- * RETURN : char* to data
+ * RETURN : char_t* to data
  */
-char* lStringData(lString string)
+char_t* lStringData(lString string)
 {
-    char* data = string->data;
+    char_t* data = string->data;
     return data;
 }
 
@@ -155,7 +155,7 @@ char* lStringData(lString string)
  * 
  * RETURN : true or false
  */
-bool_t lStringSetValue(lString string, const char* cstr)
+bool_t lStringSetValue(lString string, const char_t* cstr)
 {
     if(lStringResize(string,strlen(cstr)))
     {
@@ -178,7 +178,7 @@ bool_t lStringSetValue(lString string, const char* cstr)
  *
  * RETURN : void
  */
-void lStringGetValue(lString string, char* cstr, size_t len)
+void lStringGetValue(lString string, char_t* cstr, size_t len)
 {
     strncpy(cstr, string->data, len);
 }
@@ -221,7 +221,7 @@ bool_t lStringRemove(lString string, size_t site, size_t len)
  *
  * RETURN : true or false
  */
-bool_t lStringAppend(lString string, const char* cstr)
+bool_t lStringAppend(lString string, const char_t* cstr)
 {
     if(lStringResize(string, strlen(string->data) + strlen(cstr)))
     {
@@ -242,13 +242,13 @@ bool_t lStringAppend(lString string, const char* cstr)
  *          site   - site of string
  *          cstr   - C style string
  */
-bool_t lStringInsert(lString string, size_t site, const char* cstr)
+bool_t lStringInsert(lString string, size_t site, const char_t* cstr)
 {
     if(lStringResize(string, strlen(string->data) + strlen(cstr)))
     {
         size_t len = strlen(cstr);
-        char* src  = string->data + site;
-        char* dest = src + len;
+        char_t* src  = string->data + site;
+        char_t* dest = src + len;
         memmove(dest,src,len);
         memcpy(src,cstr,len);
         return true;
@@ -268,7 +268,7 @@ bool_t lStringInsert(lString string, size_t site, const char* cstr)
  *          len    - length to remove
  *          cstr   - C style string to insert
  */
-bool_t lStringReplace(lString string, size_t site, size_t len, const char* cstr)
+bool_t lStringReplace(lString string, size_t site, size_t len, const char_t* cstr)
 {
     return lStringRemove(string,site,len) && lStringInsert(string,site,cstr);
 }
