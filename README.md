@@ -14,7 +14,8 @@ which is included by all source files in this project.
 #	include <stdint.h>                // intX_t uintX_t
 #	include <stddef.h>                // size_t
 	typedef int             bool_t;   // boolean
-	typedef signed char     char_t;   // signed char
+	typedef char            char_t;   // char
+	typedef signed char     schar_t;  // signed char
 	typedef unsigned char   uchar_t;  // unsigned char
 	typedef void*           ptr_t;    // pointer
 	typedef void* const     cstptr_t; // const pointer
