@@ -15,8 +15,6 @@ struct lStringInfo
 
 ## APIs index
 
-### Macro Definitions
-
 ### Functions
 * [lStringCreate](#lstringcreate)  
 * [lStringDelete](#lstringdelete)
@@ -44,8 +42,10 @@ int main()
 	lString str = lStringCreate("Hello World");
 	lStringReplace(str,6,-1,"Luminouse");
 	lStringAppend(str," String");
-	
 	printf("%s\n",lStringValue(str));
+	lStringDelete(str);
+
+	return 0;
 }
 ```
 
