@@ -29,9 +29,12 @@ which is included by all source files in this project.
 #endif // LUMINOUS_NO_JOKE
 ```
 
+## Note
+Every parameters , with type ptr_t , must have the same size as element of data structure at least. In some way , parameters with type ptr_t shouldn't be a literal.
 
 ## Document
 [lList](doc/lList.md) : A double-linked list  
+[lStack](doc/lStack.md) : A stack  
 [lString](doc/lString.md) : A incomplete string    
 [lVector](doc/lVector.md) : A sequence list  
 
