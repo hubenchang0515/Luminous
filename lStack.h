@@ -29,6 +29,12 @@ lStack lStackCreateBySize(size_t size);
 /* Delete lStack */
 void lStackDelete(lStack stack);
 
+/* Clear all data */
+void lStackClear(lStack stack);
+
+/* Check if empty */
+bool_t lStackIsEmpty(lStack stack);
+
 /* Push a frame into stack */
 bool_t lStackPush(lStack stack, ptr_t value);
 

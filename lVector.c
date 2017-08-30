@@ -120,6 +120,19 @@ size_t lVectorLength(lVector vector)
 
 
 
+/* USE    : Check if empty
+ *
+ * PARAM  : vector - lVector to check if empty
+ *
+ * RETURN : true or false
+ */
+bool_t lVectorIsEmpty(lVector vector)
+{
+    return vector->used == 0;
+}
+
+
+
 /*
  * USE    : Return space of vector
  *
@@ -265,6 +278,19 @@ bool_t lVectorRemove(lVector vector, size_t site)
     {
         return false;
     }
+}
+
+
+
+/* USE    : Remove all data
+ *
+ * PARAM  : vector - lVector to clear
+ *
+ * RETURN : void
+ */
+void lVectorClear(lVector vector)
+{
+    vector->used = 0;
 }
 
 

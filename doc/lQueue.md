@@ -14,6 +14,8 @@ typedef lList lQueue;
 ### Functions
 * [lQueueCreateBySize](#lqueuecreatebysize)
 * [lQueueDelete](#lqueuedelete)
+* [lQueueClear](#lqueueclear)
+* [lQueueIsEmpty](#lqueueisempty)
 * [lQueuePush](#lqueuepush)
 * [lQueuePop](#lqueuepop)
 * [lQueuePushBack](#lqueuepushback)
@@ -93,6 +95,31 @@ lQueue lQueueCreateBySize(size_t size);
  * RETURN : void
  */
 void lQueueDelete(lQueue queue);
+```
+
+### lQueueClear
+```C
+/* USE    : Remove all data
+ *
+ * PARAM  : queue - lQeueu to clear
+ *
+ * RETURN : void
+ */
+void lQueueClear(lQueue queue);
+{
+    lListClear(queue);
+}
+```
+
+### lQueueIsEmpty
+```C
+/* USE    : Check Empty
+ *
+ * PARAM  : queue - lQueue to check
+ *
+ * RETURN : true or false
+ */
+bool_t lQueueIsEmpty(lQueue queue);
 ```
 
 ### lQueuePush

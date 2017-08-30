@@ -53,6 +53,7 @@ struct lListNode
 * [lListInsertAfter](#llistinsertafter)  
 * [lListInsertBefore](#llistinsertbefore)  
 * [lListRemove](#llistremove)  
+* [lListClear](#llistclear)
 * [lListHead](#llisthead)
 * [lListTail](#llisttail)
 * [lListFindAfter](#llistfindafter)
@@ -374,6 +375,17 @@ lListIterator lListInsertBefore(lListIterator node);
  * RETURN : void
  */
 void lListRemove(lListIterator node);
+```
+
+### lListClear
+```C
+/* USE    : Remove all node
+ *
+ * PARAM  : list - lList to clear
+ *
+ * RETURN : void
+ */
+void lListClear(lList list);
 ```
 
 ### lListHead

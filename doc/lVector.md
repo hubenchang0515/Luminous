@@ -26,12 +26,14 @@ struct lVectorInfo
 * [lVectorIncrease](#lvectorincrease)
 * [lVectorReduce](#lvectorreduce)
 * [lVectorLength](#lvectorlength)
+* [lVectorIsEmpty](#lvectorisempty)
 * [lVectorSpace](#lvectorspace)
 * [lVectorResize](#lvectorresize)
 * [lVectorPushBack](#lvectorpushback)
 * [lVectorPopBack](#lvectorpopback)
 * [lVectorInsert](#lvectorinsert)
 * [lVectorRemove](#lvectorremove)
+* [lVectorClear](#lvectorclear)
 * [lVectorSetValue](#lvectorsetvalue)
 * [lVectorGetValue](#lvectorgetvalue)
 * [lVectorGetDataPointer](#lvectorgetdatapointer)
@@ -172,6 +174,17 @@ void lVectorReduce(lVector vector);
 size_t lVectorLength(lVector vector);
 ```
 
+### lVectorIsEmpty
+```C
+/* USE    : Check if empty
+ *
+ * PARAM  : vector - lVector to check if empty
+ *
+ * RETURN : true or false
+ */
+bool_t lVectorIsEmpty(lVector vector);
+```
+
 ### lVectorSpace
 ```C
 /*
@@ -245,6 +258,17 @@ bool_t lVectorInsert(lVector vector, size_t site, ptr_t value);
  * RETURN : true or false
  */
 bool_t lVectorRemove(lVector vector, size_t site);
+```
+
+### lVectorClear
+```C
+/* USE    : Remove all data
+ *
+ * PARAM  : vector - lVector to clear
+ *
+ * RETURN : void
+ */
+void lVectorClear(lVector vector);
 ```
 
 ### lVectorSetValue

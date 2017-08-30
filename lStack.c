@@ -40,6 +40,32 @@ void lStackDelete(lStack stack)
 
 
 
+/* USE    : Clear all data
+ * 
+ * PARAM  : stack - lStack to clear
+ *
+ * RETURN : void
+ */
+void lStackClear(lStack stack)
+{
+    lVectorClear(stack);
+}
+
+
+
+/* USE    : Check if empty
+ *
+ * PARAM  : stack - lStack to check
+ *
+ * RETURN : true or false
+ */
+bool_t lStackIsEmpty(lStack stack)
+{
+    return lVectorIsEmpty(stack);
+}
+
+
+
 /* USE    : Push a stack frame into stack
  *
  * PARAM  : stack - lStack to push

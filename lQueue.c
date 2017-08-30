@@ -36,6 +36,32 @@ void lQueueDelete(lQueue queue)
 
 
 
+/* USE    : Remove all data
+ *
+ * PARAM  : queue - lQeueu to clear
+ *
+ * RETURN : void
+ */
+void lQueueClear(lQueue queue)
+{
+    lListClear(queue);
+}
+
+
+
+/* USE    : Check Empty
+ *
+ * PARAM  : queue - lQueue to check
+ *
+ * RETURN : true or false
+ */
+bool_t lQueueIsEmpty(lQueue queue)
+{
+    return lListIsEmpty(queue);
+}
+
+
+
 /* USE    : Push Back 
  *
  * PARAM  : queue - lQueue to add node

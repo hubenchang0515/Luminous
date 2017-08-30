@@ -29,6 +29,12 @@ lQueue lQueueCreateBySize(size_t size);
 /* Delete lQueue */
 void lQueueDelete(lQueue queue);
 
+/* Remove all data */
+void lQueueClear(lQueue queue);
+
+/* Check Empty */
+bool_t lQueueIsEmpty(lQueue queue);
+
 /* Push Back */
 bool_t lQueuePush(lQueue queue, ptr_t value);
 

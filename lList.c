@@ -308,6 +308,31 @@ void lListRemove(lListIterator node)
 
 
 
+/* USE    : Remove all node
+ *
+ * PARAM  : list - lList to clear
+ *
+ * RETURN : void
+ */
+void lListClear(lList list)
+{
+	lListIterator p   = lListEnd(list);
+	lListIterator pre = lListBefore(p,1);
+	while(p != nullptr)
+	{
+		free(p->data);
+		free(p);
+		p = pre;
+		pre = lListBefore(p,1);
+	}
+
+	list->begin  = nullptr;
+	list->end    = nullptr;
+	list->length = 0;
+}
+
+
+
 /* USE    : Head of list 
  *
  * PARAM  : node - lListIterator to any lListNode of list

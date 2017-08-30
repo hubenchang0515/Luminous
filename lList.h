@@ -89,6 +89,9 @@ lListIterator lListInsertBefore(lListIterator node);
 /* Remove node */
 void lListRemove(lListIterator node);
 
+/* Remove all node */
+void lListClear(lList list);
+
 /* Head of list */
 lListIterator lListHead(lListIterator node);
 

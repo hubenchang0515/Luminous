@@ -14,6 +14,8 @@ typedef lVector lStack;
 ### Functions
 * [lStackCreateBySize](#lstackcreatebysize)
 * [lStackDelete](#lstackdelete)
+* [lStackClear](#lstackclear)
+* [lStackIsEmpty](#lstackisempty)
 * [lStackPush](#lstackpush)
 * [lStackPop](#lstackpop)
 * [lStackGetTop](#lstackgettop)
@@ -87,6 +89,28 @@ lStack lStackCreateBySize(size_t size);
  * RETURN : void
  */
 void lStackDelete(lStack stack);
+```
+
+### lStackClear
+```C
+/* USE    : Clear all data
+ * 
+ * PARAM  : stack - lStack to clear
+ *
+ * RETURN : void
+ */
+void lStackClear(lStack stack);
+```
+
+### lStackIsEmpty
+```C
+/* USE    : Check if empty
+ *
+ * PARAM  : stack - lStack to check
+ *
+ * RETURN : true or false
+ */
+bool_t lStackIsEmpty(lStack stack);
 ```
 
 ### lStackPush

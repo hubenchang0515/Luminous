@@ -55,6 +55,9 @@ void lVectorReduce(lVector vector);
 /* Length of vector */
 size_t lVectorLength(lVector vector);
 
+/* Check if empty */
+bool_t lVectorIsEmpty(lVector vector);
+
 /* Space of vector */
 size_t lVectorSpace(lVector vector);
 
@@ -72,6 +75,9 @@ bool_t lVectorInsert(lVector vector, size_t site, ptr_t value);
 
 /* Remove data */
 bool_t lVectorRemove(lVector vector, size_t site);
+
+/* Remove all data */
+void lVectorClear(lVector vector);
 
 /* Set value */
 bool_t lVectorSetValue(lVector vector, size_t site, ptr_t value);
