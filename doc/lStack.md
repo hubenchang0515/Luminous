@@ -1,5 +1,5 @@
 # lStack
-lStack is a stack make by lVector.
+lStack is a stack made by lVector.
 
 ## Types
 ```C
@@ -67,7 +67,7 @@ lStack lStackCreateBySize(size_t size);
 ### lStackCreate
 ```C
 /*
- * USE    : Create lStack by size of data
+ * USE    : Create lStack
  *
  * PARAM  : T - type of data
  *

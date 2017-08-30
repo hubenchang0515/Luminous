@@ -24,7 +24,7 @@ typedef lVector lStack;
 lStack lStackCreateBySize(size_t size);
 #ifndef lStackCreate
 #   define lStackCreate(T) lStackCreateBySize(sizeof(T))
-#endif //lVectorCreate
+#endif //lStackCreate
 
 /* Delete lStack */
 void lStackDelete(lStack stack);

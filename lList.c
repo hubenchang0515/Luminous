@@ -468,7 +468,7 @@ lListIterator lListPushFront(lList list, ptr_t value)
 	lListIterator p = list->begin;
 	if(p != nullptr)
 	{
-		p = lListInsertAfter(p);
+		p = lListInsertBefore(p);
 		if(p != nullptr)
 		{
 			lListSetValue(p,value);
@@ -499,13 +499,18 @@ lListIterator lListPushFront(lList list, ptr_t value)
  *
  * PARAM  : list - list you want to remove end
  *
- * RETURN : void
+ * RETURN : true or false
  */
-void lListPopBack(lList list)
+bool_t lListPopBack(lList list)
 {
 	if(list->end != nullptr)
 	{
 		lListRemove(list->end);
+		return true;
+	}
+	else
+	{
+		return false;
 	}
 }
 
@@ -513,13 +518,18 @@ void lListPopBack(lList list)
  *
  * PARAM  : list - list you want to remove end
  *
- * RETURN : void
+ * RETURN : true or false
  */
-void lListPopFront(lList list)
+bool_t lListPopFront(lList list)
 {
 	if(list->begin != nullptr)
 	{
 		lListRemove(list->begin);
+		return true;
+	}
+	else
+	{
+		return false;
 	}
 }
 

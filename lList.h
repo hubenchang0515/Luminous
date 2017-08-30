@@ -114,10 +114,10 @@ lListIterator lListPushBack(lList list, ptr_t value);
 lListIterator lListPushFront(lList list, ptr_t value);
 
 /* Remove end lListNode */
-void lListPopBack(lList list);
+bool_t lListPopBack(lList list);
 
 /* Remove begin lListNode */
-void lListPopFront(lList list);
+bool_t lListPopFront(lList list);
 
 /* Get lListNode from begin */
 lListIterator lListIndexAt(lList list, size_t ordinal);

@@ -217,9 +217,9 @@ lListIterator lListPushFront(lList list, ptr_t value);
  *
  * PARAM  : list - list you want to remove end
  *
- * RETURN : void
+ * RETURN : true or false
  */
-void lListPopBack(lList list);
+bool_t lListPopBack(lList list);
 ```
 
 ### lListPopFront
@@ -228,9 +228,9 @@ void lListPopBack(lList list);
  *
  * PARAM  : list - list you want to remove end
  *
- * RETURN : void
+ * RETURN : true or false
  */
-void lListPopFront(lList list);
+bool_t lListPopFront(lList list);
 ```
 
 ### lListIndexAt
