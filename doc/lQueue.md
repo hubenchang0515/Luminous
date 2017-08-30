@@ -20,6 +20,10 @@ typedef lList lQueue;
 * [lQueuePopBack](#lqueuepopback)
 * [lQueuePushFront](#lqueuepushfront)
 * [lQueuePopFront](#lqueuepopfront)
+* [lQueueGetFront](#lqueuegetfront)
+* [lQueueSetFront](#lqueuesetfront)
+* [lQueueGetBack](#lqueuegetback)
+* [lQueueSetBack](#lqueuesetback)
 * [lQueueCount](#lqueuecount)
 
 ## Demo
@@ -161,6 +165,54 @@ bool_t lQueuePushFront(lQueue queue, ptr_t value);
  * RETURN : true or false
  */ 
 bool_t lQueuePopFront(lQueue queue, ptr_t value);
+```
+
+### lQueueGetFront
+```C
+/* USE    : Get Front but not remove it
+ *
+ * PARAM  : queue - lQueue to add node
+ *          value - value of new node
+ *
+ * RETURN : true or false
+ */ 
+bool_t lQueueGetFront(lQueue queue, ptr_t value);
+```
+
+### lQueueSetFront
+```C
+/* USE    : Set Front rather than push
+ *
+ * PARAM  : queue - lQueue to add node
+ *          value - value of new node
+ *
+ * RETURN : true or false
+ */ 
+bool_t lQueueSetFront(lQueue queue, ptr_t value);
+```
+
+### lQueueGetBack
+```C
+/* USE    : Get Back but not remove it
+ *
+ * PARAM  : queue - lQueue to add node
+ *          value - value of new node
+ *
+ * RETURN : true or false
+ */ 
+bool_t lQueueGetBack(lQueue queue, ptr_t value);
+```
+
+### lQueueSetBack
+```C
+/* USE    : Set Back rather than push
+ *
+ * PARAM  : queue - lQueue to add node
+ *          value - value of new node
+ *
+ * RETURN : true or false
+ */ 
+bool_t lQueueSetBack(lQueue queue, ptr_t value);
 ```
 
 ### lQueueCount

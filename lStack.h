@@ -35,6 +35,12 @@ bool_t lStackPush(lStack stack, ptr_t value);
 /* Pop a frame from stack */
 bool_t lStackPop(lStack stack, ptr_t value);
 
+/* Get value of top but not remove it */
+bool_t lStackGetTop(lStack stack, ptr_t value);
+
+/* Set value of top */
+bool_t lStackSetTop(lStack stack, ptr_t value);
+
 /* stack frame count of stack */
 size_t lStackCount(lStack stack);
 

@@ -16,6 +16,8 @@ typedef lVector lStack;
 * [lStackDelete](#lstackdelete)
 * [lStackPush](#lstackpush)
 * [lStackPop](#lstackpop)
+* [lStackGetTop](#lstackgettop)
+* [lStackSetTop](#lstacksettop)
 * [lStackCount](#lstackcount)
 
 ## Demo
@@ -109,6 +111,29 @@ bool_t lStackPush(lStack stack, ptr_t value);
  * return : true or false
  */
 bool_t lStackPop(lStack stack, ptr_t value);
+```
+
+### lStackGetTop
+```C
+/* USE    : Get value of top but not remove it
+ *
+ * PARAM  : stack - lStack to pop
+ *          value - store the return value
+ *
+ * return : true or false
+ */
+bool_t lStackGetTop(lStack stack, ptr_t value);
+```
+
+### lStackSetTop
+```C
+/* USE    : Set value of top rather than push
+ * PARAM  : stack - lStack to pop
+ *          value - store the return value
+ *
+ * return : true or false
+ */
+bool_t lStackSetTop(lStack stack, ptr_t value);
 ```
 
 ### lStackCount

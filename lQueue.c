@@ -140,6 +140,97 @@ bool_t lQueuePopFront(lQueue queue, ptr_t value)
     } 
 }
 
+/* USE    : Get Front but not remove it
+ *
+ * PARAM  : queue - lQueue to add node
+ *          value - value of new node
+ *
+ * RETURN : true or false
+ */ 
+bool_t lQueueGetFront(lQueue queue, ptr_t value)
+{
+    lListIterator p = lListBegin(queue);
+    if(p != nullptr)
+    {
+        lListGetValue(p,value);
+        return true;
+    }
+    else
+    {
+        return false;
+    } 
+}
+
+
+
+/* USE    : Set Front rather than push
+ *
+ * PARAM  : queue - lQueue to add node
+ *          value - value of new node
+ *
+ * RETURN : true or false
+ */ 
+bool_t lQueueSetFront(lQueue queue, ptr_t value)
+{
+    lListIterator p = lListBegin(queue);
+    if(p != nullptr)
+    {
+        lListSetValue(p,value);
+        return true;
+    }
+    else
+    {
+        return false;
+    } 
+}
+
+
+
+/* USE    : Get Back but not remove it
+ *
+ * PARAM  : queue - lQueue to add node
+ *          value - value of new node
+ *
+ * RETURN : true or false
+ */ 
+bool_t lQueueGetBack(lQueue queue, ptr_t value)
+{
+    lListIterator p = lListEnd(queue);
+    if(p != nullptr)
+    {
+        lListGetValue(p,value);
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+
+
+/* USE    : Set Back rather than push
+ *
+ * PARAM  : queue - lQueue to add node
+ *          value - value of new node
+ *
+ * RETURN : true or false
+ */ 
+bool_t lQueueSetBack(lQueue queue, ptr_t value)
+{
+    lListIterator p = lListEnd(queue);
+    if(p != nullptr)
+    {
+        lListSetValue(p,value);
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+
 /* USE    : Count
  *
  * PARAM  : queue - lQueue to get count

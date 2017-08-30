@@ -47,6 +47,18 @@ bool_t lQueuePushFront(lQueue queue, ptr_t value);
 /* Pop Front */
 bool_t lQueuePopFront(lQueue queue, ptr_t value);
 
+/* Get Front */
+bool_t lQueueGetFront(lQueue queue, ptr_t value);
+
+/* Set Front */
+bool_t lQueueSetFront(lQueue queue, ptr_t value);
+
+/* Get Back */
+bool_t lQueueGetBack(lQueue queue, ptr_t value);
+
+/* Set Back */
+bool_t lQueueSetBack(lQueue queue, ptr_t value);
+
 /* count */
 size_t lQueueCount(lQueue queue);
 

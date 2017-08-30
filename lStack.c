@@ -69,6 +69,33 @@ bool_t lStackPop(lStack stack, ptr_t value)
 
 
 
+/* USE    : Get value of top but not remove it
+ *
+ * PARAM  : stack - lStack to pop
+ *          value - store the return value
+ *
+ * return : true or false
+ */
+bool_t lStackGetTop(lStack stack, ptr_t value)
+{
+    return lVectorGetValue(stack,lVectorLength(stack) - 1, value);
+}
+
+
+
+/* USE    : Set value of top rather than push
+ * PARAM  : stack - lStack to pop
+ *          value - store the return value
+ *
+ * return : true or false
+ */
+bool_t lStackSetTop(lStack stack, ptr_t value)
+{
+    return lVectorSetValue(stack, lVectorLength(stack) - 1, value);
+}
+
+
+
 /* USE    : Return stack frame count of stack
  *
  * PARAM  : stack - stack to get count
