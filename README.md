@@ -34,7 +34,7 @@ Every parameters , with type ptr_t , must have the same size as element of data 
 
 ## Document
 [lList](doc/lList.md) : A double-linked list  
-[lQueue](dec/lQueue.md) : A deque  made by lList  
+[lQueue](doc/lQueue.md) : A deque  made by lList  
 [lStack](doc/lStack.md) : A stack  made by lVector  
 [lString](doc/lString.md) : A incomplete string    
 [lVector](doc/lVector.md) : A sequence list  
