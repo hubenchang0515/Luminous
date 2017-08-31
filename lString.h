@@ -22,8 +22,8 @@ typedef struct lStringInfo lStringInfo;
 
 struct lStringInfo
 {
-    size_t    space;     // space of String
-    char*  data;         // pointer to first character
+    size_t space;     // space of String
+    char*  data;      // pointer to first character
 };
 
 /* Create lString */
@@ -78,7 +78,7 @@ bool_t lStringInsertL(lString string, lString lstr);
 bool_t lStringReplaceL(lString string, size_t site, size_t len, lString lstr);
 
 /* Set lString as sprintf */
-bool_t lStringSprintf(lString string, const char fmt,...);
+bool_t lStringSprintf(lString string, const char* fmt,...);
 
 #ifdef __cplusplus
     }

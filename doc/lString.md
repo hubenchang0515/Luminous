@@ -30,6 +30,7 @@ struct lStringInfo
 * [lStringAppend](#lstringappend)
 * [lStringInsert](#lstringinsert)
 * [lStringReplace](#lstringreplace)
+* [lStringSprintf](#lstringsprintf)
 
 
 ## Demo 
@@ -39,12 +40,13 @@ struct lStringInfo
 
 int main()
 {
-	lString str = lStringCreate("Hello World");
-	lStringReplace(str,6,-1,"Luminouse");
-	lStringAppend(str," String");
+	lString str = lStringCreate("");
+	lStringSprintf(str,"pi = %.2lf",3.14);
+	lStringAppend(str,"15926");
+	lStringReplace(str,0,2,"Circumference Ratio");
 	printf("%s\n",lStringValue(str));
+	
 	lStringDelete(str);
-
 	return 0;
 }
 ```
@@ -213,4 +215,17 @@ bool_t lStringInsert(lString string, size_t site, const char* cstr);
  *          cstr   - C style string to insert
  */
 bool_t lStringReplace(lString string, size_t site, size_t len, const char* cstr);
+```
+
+### lStringSprintf
+```C
+/* USE    : Set lString as sprintf
+ *
+ * PARAM  : string - lString to save data
+ *          fmt    - format string as sprintf in stdio.h
+ *          ...    - va_arg list as sprintf in stdio.h
+ *
+ * RETURN : true or false
+ */
+bool_t lStringSprintf(lString string, const char* fmt,...);
 ```

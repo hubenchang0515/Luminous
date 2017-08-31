@@ -11,6 +11,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
+#include <stdarg.h>
 #include "lString.h"
 
 /* USE    : Create lString
@@ -271,4 +272,64 @@ bool_t lStringInsert(lString string, size_t site, const char_t* cstr)
 bool_t lStringReplace(lString string, size_t site, size_t len, const char_t* cstr)
 {
     return lStringRemove(string,site,len) && lStringInsert(string,site,cstr);
+}
+
+
+
+/* USE    : Set lString as sprintf
+ *
+ * PARAM  : string - lString to save data
+ *          fmt    - format string as sprintf in stdio.h
+ *          ...    - va_arg list as sprintf in stdio.h
+ *
+ * RETURN : true or false
+ */
+bool_t lStringSprintf(lString string, const char* fmt,...)
+{
+#ifndef LSPRINTF_ORIGINAL_SPACE
+#define LSPRINTF_ORIGINAL_SPACE 256
+    char*   buf  = (char*)malloc(LSPRINTF_ORIGINAL_SPACE);
+    int  size = LSPRINTF_ORIGINAL_SPACE; 
+
+    va_list args;
+    va_start(args,fmt);
+
+    int len = 0;
+    while(1)
+    {
+        len = vsnprintf(buf,size,fmt,args);
+        
+        if(len < 0) // failed
+        {
+            va_end(args);
+            free(buf);
+            return false;
+        }
+        else if(len >= size) // memory is not enough
+        {
+            char* p = realloc(buf,len + 1);
+            if(p == nullptr)
+            {
+                va_end(args);
+                free(buf);
+                return false;
+            }
+
+            buf = p;
+            size = len + 1;
+            va_end(args);
+            va_start(args,fmt);
+            continue;
+        }
+        else // success
+        {
+            lStringSetValue(string,buf);
+            va_end(args);
+            free(buf);
+            return true;
+        }
+    }
+
+#undef LSPRINTF_ORIGINAL_SPACE
+#endif
 }
