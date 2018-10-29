@@ -1,4 +1,4 @@
-/* lList.h - Linked list.
+/* List.h - Linked list.
 ** https://github.com/hubenchang0515/Luminous
 **
 ** Copyright (C) 2017 hubenchang0515
@@ -11,7 +11,7 @@
 #ifndef LUMINOUS_LIST_H
 #define LUMINOUS_LIST_H
 
-#include "lCore.h"
+#include "core.h"
 
 #ifdef __cplusplus 
 	extern "C" {
@@ -19,114 +19,114 @@
 
 
 /* Double-linked List and Node */
-typedef struct lListInfo  lListInfo;
-typedef struct lListInfo* lList;
-typedef struct lListNode  lListNode;
-typedef struct lListNode* lListIterator;
+typedef struct ListInfo  ListInfo;
+typedef struct ListInfo* List;
+typedef struct ListNode  ListNode;
+typedef struct ListNode* ListIterator;
 
-struct lListInfo
+struct ListInfo
 {
 	size_t 			datasize; // size of data
 	size_t 			length;   // length of list
-	lListIterator 	begin;    // first lListNode of list
-	lListIterator 	end;      // last lListNode of list
+	ListIterator 	begin;    // first ListNode of list
+	ListIterator 	end;      // last ListNode of list
 };
 
-struct lListNode
+struct ListNode
 {
 	size_t      	size;  // size of data
-	lList 			list;  // double-linked list
-	lListIterator 	prev;  // previous node
-	lListIterator 	next;  // next node
+	List 			list;  // double-linked list
+	ListIterator 	prev;  // previous node
+	ListIterator 	next;  // next node
 	ptr_t       	data;  // pointer to data
 };
 
 
 
 /* for-each */
-#ifndef lListFor 
-#	define lListForEach(iter,list) \
-		for(lListIterator iter = list->begin; iter != nullptr; iter = iter->next)
+#ifndef ListForEach 
+#	define ListForEach(iter,list) \
+		for(ListIterator iter = list->begin; iter != nullptr; iter = iter->next)
 #endif // lListFor
 
 
 /* Create linked list */
-lList lListCreateBySize(size_t datasize);
-#ifndef lListCreate
-#	define lListCreate(T) lListCreateBySize(sizeof(T))
-#endif // lListCreate
+List listCreateBySize(size_t datasize);
+#ifndef listCreate
+#	define listCreate(T) listCreateBySize(sizeof(T))
+#endif // listCreate
 
 /* Delete linked list */
-void lListDelete(lList list);
+void listDelete(List list);
 
 /* Begin of list */
-lListIterator lListBegin(lList list);
+ListIterator listBegin(List list);
 
 /* End of list */
-lListIterator lListEnd(lList list);
+ListIterator listEnd(List list);
 
 /* Set value of node */
-void lListSetValue(lListIterator node, ptr_t value);
+void listSetValue(ListIterator node, ptr_t value);
 
 /* Get value of node */
-void lListGetValue(lListIterator node, ptr_t value);
+void listGetValue(ListIterator node, ptr_t value);
 
 /* Get pointer to data */
-ptr_t lListGetDataPointer(lListIterator node);
+ptr_t listGetDataPointer(ListIterator node);
 
-/* Get a lListNode after node */
-lListIterator lListAfter(lListIterator node, size_t distance);
+/* Get a ListNode after node */
+ListIterator listAfter(ListIterator node, size_t distance);
 
-/* Get a lListNode before node */
-lListIterator lListBefore(lListIterator node, size_t distance);
+/* Get a ListNode before node */
+ListIterator listBefore(ListIterator node, size_t distance);
 
-/* Insert a lListNode after node */
-lListIterator lListInsertAfter(lListIterator node);
+/* Insert a ListNode after node */
+ListIterator listInsertAfter(ListIterator node);
 
-/* Insert a lListNode before node */
-lListIterator lListInsertBefore(lListIterator node);
+/* Insert a ListNode before node */
+ListIterator listInsertBefore(ListIterator node);
 
 /* Remove node */
-void lListRemove(lListIterator node);
+void listRemove(ListIterator node);
 
 /* Remove all node */
-void lListClear(lList list);
+void listClear(List list);
 
 /* Head of list */
-lListIterator lListHead(lListIterator node);
+ListIterator listHead(ListIterator node);
 
 /* Tail of list */
-lListIterator lListTail(lListIterator node);
+ListIterator listTail(ListIterator node);
 
-/* Find a lListNode after node */
-lListIterator lListFindAfter(lListIterator node, ptr_t value, size_t ordinal);
+/* Find a ListNode after node */
+ListIterator listFindAfter(ListIterator node, ptr_t value, size_t ordinal);
 
-/* Find a lListNode before node */
-lListIterator lListFindBefore(lListIterator node, ptr_t value, size_t ordinal);
+/* Find a ListNode before node */
+ListIterator listFindBefore(ListIterator node, ptr_t value, size_t ordinal);
 
 /* Nodes number of list */
-size_t lListCount(lList node);
+size_t listCount(List node);
 
 /* check list if empty  */
-bool_t lListIsEmpty(lList list);
+bool_t listIsEmpty(List list);
 
-/* Insert a lListNode after end */
-lListIterator lListPushBack(lList list, ptr_t value);
+/* Insert a ListNode after end */
+ListIterator listPushBack(List list, ptr_t value);
 
-/* Insert a lListNode before begin */
-lListIterator lListPushFront(lList list, ptr_t value);
+/* Insert a ListNode before begin */
+ListIterator listPushFront(List list, ptr_t value);
 
-/* Remove end lListNode */
-bool_t lListPopBack(lList list);
+/* Remove end ListNode */
+bool_t listPopBack(List list);
 
-/* Remove begin lListNode */
-bool_t lListPopFront(lList list);
+/* Remove begin ListNode */
+bool_t listPopFront(List list);
 
-/* Get lListNode from begin */
-lListIterator lListIndexAt(lList list, size_t ordinal);
+/* Get ListNode from begin */
+ListIterator listIndexAt(List list, size_t ordinal);
 
-/* Get lListNode from end */
-lListIterator lListInverseAt(lList list, size_t ordinal);
+/* Get ListNode from end */
+ListIterator listInverseAt(List list, size_t ordinal);
 
 #ifdef __cplusplus 
 	}

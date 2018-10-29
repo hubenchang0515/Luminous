@@ -1,4 +1,4 @@
-/* lVector.h - Vector.
+/* Vector.h - Vector.
 ** https://github.com/hubenchang0515/Luminous
 **
 ** Copyright (C) 2017 hubenchang0515
@@ -10,18 +10,18 @@
 
 #include <stdlib.h>
 #include <string.h>
-#include "lVector.h"
+#include "vector.h"
 
 /*
- * USE    : Create lVector by size of data
+ * USE    : Create Vector by size of data
  *
  * PARAM  : size - size of data
  *
- * RETURN : lVector or nullptr
+ * RETURN : Vector or nullptr
  */
-lVector lVectorCreateBySize(size_t size)
+Vector vectorCreateBySize(size_t size)
 {
-    lVector vector = (lVector)malloc(sizeof(lVectorInfo));
+    Vector vector = (Vector)malloc(sizeof(VectorInfo));
     if(vector == nullptr)
     {
         return nullptr;
@@ -40,11 +40,11 @@ lVector lVectorCreateBySize(size_t size)
 /*
  * USE    : Delete Vector
  *
- * PARAM  : vector - lVector to delete
+ * PARAM  : vector - Vector to delete
  *
  * RETURN : void
  */
-void lVectorDelete(lVector vector)
+void vectorDelete(Vector vector)
 {
     free(vector->data);
     free(vector);
@@ -55,11 +55,11 @@ void lVectorDelete(lVector vector)
 /*
  * USE    : Increase space of vector
  *
- * PARAM  : vector - lVector you want to increase
+ * PARAM  : vector - Vector you want to increase
  *
  * RETURN : true or false
  */
-bool_t lVectorIncrease(lVector vector)
+bool_t vectorIncrease(Vector vector)
 {
     size_t space = vector->space;
 
@@ -93,11 +93,11 @@ bool_t lVectorIncrease(lVector vector)
 /*
  * USE    : Reduce space of vector to used
  *
- * PARAM  : vector - lVector you want to reduce
+ * PARAM  : vector - Vector you want to reduce
  *
  * RETURN : void
  */
-void lVectorReduce(lVector vector)
+void vectorReduce(Vector vector)
 {
     vector->data = realloc(vector->data,vector->used);
     // I think it's impossible to failed while reduce memory by realloc
@@ -113,7 +113,7 @@ void lVectorReduce(lVector vector)
  *
  * RETURN : length of vector
  */
-size_t lVectorLength(lVector vector)
+size_t vectorLength(Vector vector)
 {
     return vector->used;
 }
@@ -122,11 +122,11 @@ size_t lVectorLength(lVector vector)
 
 /* USE    : Check if empty
  *
- * PARAM  : vector - lVector to check if empty
+ * PARAM  : vector - Vector to check if empty
  *
  * RETURN : true or false
  */
-bool_t lVectorIsEmpty(lVector vector)
+bool_t vectorIsEmpty(Vector vector)
 {
     return vector->used == 0;
 }
@@ -140,7 +140,7 @@ bool_t lVectorIsEmpty(lVector vector)
  *
  * RETURN : space of vector
  */
-size_t lVectorSpace(lVector vector)
+size_t vectorSpace(Vector vector)
 {
     return vector->space;
 }
@@ -150,12 +150,12 @@ size_t lVectorSpace(lVector vector)
 /* 
  * USE    : Resize the space of vector
  *
- * PARAM  : vector - lVector to resize space
+ * PARAM  : vector - Vector to resize space
  *          space  - the new space
  *
  * RETURN : true or false
  */
-bool_t lVectorResize(lVector vector, size_t space)
+bool_t vectorResize(Vector vector, size_t space)
 {
     ptr_t data = realloc(vector->data ,space * vector->itemsize);
     if(data == nullptr)
@@ -176,14 +176,14 @@ bool_t lVectorResize(lVector vector, size_t space)
 /*
  * USE    : Insert data after end
  *
- * PARAM  : vector - lVector to insert
+ * PARAM  : vector - Vector to insert
  *          value  - value to insert
  *
  * RETURN : true of false
  */
-bool_t lVectorPushBack(lVector vector, ptr_t value)
+bool_t vectorPushBack(Vector vector, ptr_t value)
 {
-    if(vector->used < vector->space || lVectorIncrease(vector))
+    if(vector->used < vector->space || vectorIncrease(vector))
     {
         ptr_t site = vector->data + vector->used * vector->itemsize;
         memcpy(site,value,vector->itemsize);
@@ -202,11 +202,11 @@ bool_t lVectorPushBack(lVector vector, ptr_t value)
 /*
  * USE    : Remove the last data
  *
- * PARAM  : vector - lVector to remove data
+ * PARAM  : vector - Vector to remove data
  *
  * RETURN : true or false
  */
-bool_t lVectorPopBack(lVector vector)
+bool_t vectorPopBack(Vector vector)
 {
     if(vector->used > 0)
     {
@@ -225,19 +225,19 @@ bool_t lVectorPopBack(lVector vector)
 
 /* USE    : Insert data
  *
- * PARAM  : vector - lVector to insert
+ * PARAM  : vector - Vector to insert
  *          site   - site of data , interval [0 , vector->used]
  *          value  - value of data
  *
  * RETURN : ture or false
  */
-bool_t lVectorInsert(lVector vector, size_t site, ptr_t value)
+bool_t vectorInsert(Vector vector, size_t site, ptr_t value)
 {
     if(site > vector->used)
     {
         return false;
     }
-    else if(vector->used < vector->space || lVectorIncrease(vector))
+    else if(vector->used < vector->space || vectorIncrease(vector))
     {
         size_t size = (vector->used - site) * vector->itemsize;
         ptr_t  src = vector->data + site * vector->itemsize;
@@ -257,12 +257,12 @@ bool_t lVectorInsert(lVector vector, size_t site, ptr_t value)
 
 /* USE    : Remove data
  *
- * PARAM  : vector - lVector to remove
+ * PARAM  : vector - Vector to remove
  *          site   - site of data , interval [0 , vector->used)
  *
  * RETURN : true or false
  */
-bool_t lVectorRemove(lVector vector, size_t site)
+bool_t vectorRemove(Vector vector, size_t site)
 {
     if(site < vector->used)
     {
@@ -284,11 +284,11 @@ bool_t lVectorRemove(lVector vector, size_t site)
 
 /* USE    : Remove all data
  *
- * PARAM  : vector - lVector to clear
+ * PARAM  : vector - Vector to clear
  *
  * RETURN : void
  */
-void lVectorClear(lVector vector)
+void vectorClear(Vector vector)
 {
     vector->used = 0;
 }
@@ -297,13 +297,13 @@ void lVectorClear(lVector vector)
 
 /* USE    : Set value
  *
- * PARAM  : vector - lVector to set value
+ * PARAM  : vector - Vector to set value
  *          site   - site of data , interval [0 , vector->used)
  *          value  - value of data
  *
  * RETURN : true or false
  */
-bool_t lVectorSetValue(lVector vector, size_t site, ptr_t value)
+bool_t vectorSetValue(Vector vector, size_t site, ptr_t value)
 {
     if(site >= vector->used)
     {
@@ -319,13 +319,13 @@ bool_t lVectorSetValue(lVector vector, size_t site, ptr_t value)
 
 /* USE    : Get value
  *
- * PARAM  : vector - lVector to get value
+ * PARAM  : vector - Vector to get value
  *          site   - site of data , interval [0 , vector->used)
  *          value  - value of data
  *
  * RETURN : true or false
  */
-bool_t lVectorGetValue(lVector vector, size_t site, ptr_t value)
+bool_t vectorGetValue(Vector vector, size_t site, ptr_t value)
 {
     if(site >= vector->used)
     {
@@ -343,12 +343,12 @@ bool_t lVectorGetValue(lVector vector, size_t site, ptr_t value)
 
 /* USE    : Get pointer to a data
  *
- * PARAM  : vector - lVector to get
+ * PARAM  : vector - Vector to get
  *          site   - site of data , interval [0 , vector->used)
  *
  * RETURN : ptr_t to a data or nullptr
  */
-ptr_t lVectorGetDataPointer(lVector vector,size_t site)
+ptr_t vectorGetDataPointer(Vector vector,size_t site)
 {
     if(site >= vector->used)
     {

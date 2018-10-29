@@ -1,4 +1,4 @@
-/* lQueue.h - deque
+/* Queue.h - deque
 ** https://github.com/hubenchang0515/Luminous
 **
 ** Copyright (C) 2017 hubenchang0515
@@ -11,62 +11,62 @@
 #ifndef LUMINOUS_QUEUE_H
 #define LUMINOUS_QUEUE_H
 
-#include "lCore.h"
-#include "lList.h"
+#include "core.h"
+#include "list.h"
 
 #ifdef __cplusplus 
 	extern "C" {
 #endif
 
-typedef lList lQueue;
+typedef List Queue;
 
-/* Create lQueue */
-lQueue lQueueCreateBySize(size_t size);
-#ifndef lQueueCreate
-#   define lQueueCreate(T) lListCreateBySize(sizeof(T))
-#endif //lQueueCreate
+/* Create Queue */
+Queue queueCreateBySize(size_t size);
+#ifndef queueCreate
+#   define queueCreate(T) listCreateBySize(sizeof(T))
+#endif //queueCreate
 
-/* Delete lQueue */
-void lQueueDelete(lQueue queue);
+/* Delete Queue */
+void queueDelete(Queue queue);
 
 /* Remove all data */
-void lQueueClear(lQueue queue);
+void queueClear(Queue queue);
 
 /* Check Empty */
-bool_t lQueueIsEmpty(lQueue queue);
+bool_t queueIsEmpty(Queue queue);
 
 /* Push Back */
-bool_t lQueuePush(lQueue queue, ptr_t value);
+bool_t queuePush(Queue queue, ptr_t value);
 
 /* Pop front */
-bool_t lQueuePop(lQueue queue, ptr_t value);
+bool_t queuePop(Queue queue, ptr_t value);
 
 /* Push Back */
-bool_t lQueuePushBack(lQueue queue, ptr_t value);
+bool_t queuePushBack(Queue queue, ptr_t value);
 
 /* Pop Back */
-bool_t lQueuePopBack(lQueue queue, ptr_t value);
+bool_t queuePopBack(Queue queue, ptr_t value);
 
 /* Push Front */
-bool_t lQueuePushFront(lQueue queue, ptr_t value);
+bool_t queuePushFront(Queue queue, ptr_t value);
 
 /* Pop Front */
-bool_t lQueuePopFront(lQueue queue, ptr_t value);
+bool_t queuePopFront(Queue queue, ptr_t value);
 
 /* Get Front */
-bool_t lQueueGetFront(lQueue queue, ptr_t value);
+bool_t queueGetFront(Queue queue, ptr_t value);
 
 /* Set Front */
-bool_t lQueueSetFront(lQueue queue, ptr_t value);
+bool_t queueSetFront(Queue queue, ptr_t value);
 
 /* Get Back */
-bool_t lQueueGetBack(lQueue queue, ptr_t value);
+bool_t queueGetBack(Queue queue, ptr_t value);
 
 /* Set Back */
-bool_t lQueueSetBack(lQueue queue, ptr_t value);
+bool_t queueSetBack(Queue queue, ptr_t value);
 
 /* count */
-size_t lQueueCount(lQueue queue);
+size_t queueCount(Queue queue);
 
 #ifdef __cplusplus
     }

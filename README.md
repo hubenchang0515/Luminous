@@ -33,9 +33,10 @@ which is included by all source files in this project.
 Every parameters , with type ptr_t , must have the same size as element of data structure at least. In some way , parameters with type ptr_t shouldn't be a literal.
 
 ## Document
-[lList](doc/lList.md) : A double-linked list  
-[lQueue](doc/lQueue.md) : A deque  made by lList  
-[lStack](doc/lStack.md) : A stack  made by lVector  
-[lString](doc/lString.md) : A incomplete string    
-[lVector](doc/lVector.md) : A sequence list  
+**WARNING** : Following content may has mistake  , because of refactoring.  
+[List](doc/List.md) : A double-linked list  
+[Queue](doc/Queue.md) : A deque made by lList  
+[Stack](doc/Stack.md) : A stack made by lVector  
+[String](doc/String.md) : A incomplete string ``[DEPRECATED]``  
+[Vector](doc/Vector.md) : A sequence list  
 

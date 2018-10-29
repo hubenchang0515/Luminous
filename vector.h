@@ -1,4 +1,4 @@
-/* lVector.h - Vector.
+/* Vector.h - Vector.
 ** https://github.com/hubenchang0515/Luminous
 **
 ** Copyright (C) 2017 hubenchang0515
@@ -11,16 +11,16 @@
 #ifndef LUMINOUS_VECTOR_H
 #define LUMINOUS_VECTOR_H
 
-#include "lCore.h"
+#include "core.h"
 
 #ifdef __cplusplus 
 	extern "C" {
 #endif
 
-typedef struct lVectorInfo* lVector;
-typedef struct lVectorInfo lVectorInfo;
+typedef struct VectorInfo* Vector;
+typedef struct VectorInfo VectorInfo;
 
-struct lVectorInfo
+struct VectorInfo
 {
     size_t itemsize;  // size of one item
     size_t space;     // space of vector
@@ -30,63 +30,63 @@ struct lVectorInfo
 
 
 /* for-each */
-#ifndef lVectorForEach
-#   define lVectorForEach(iter,vector) \
+#ifndef VectorForEach
+#   define VectorForEach(iter,vector) \
         for(ptr_t iter =  vector->data ; \
              iter < vector->data + vector->itemsize * vector->used; \
              iter += vector->itemsize)
 #endif // lVectorForEach
 
 /* Create vector */
-lVector lVectorCreateBySize(size_t size);
-#ifndef lVectorCreate
-#   define lVectorCreate(T) lVectorCreateBySize(sizeof(T))
-#endif //lVectorCreate
+Vector vectorCreateBySize(size_t size);
+#ifndef vectorCreate
+#   define vectorCreate(T) vectorCreateBySize(sizeof(T))
+#endif //vectorCreate
 
 /* Delete vector */
-void lVectorDelete(lVector vector);
+void vectorDelete(Vector vector);
 
 /* Increase vector space */
-bool_t lVectorIncrease(lVector vector);
+bool_t vectorIncrease(Vector vector);
 
 /* Reduce vector space */
-void lVectorReduce(lVector vector);
+void vectorReduce(Vector vector);
 
 /* Length of vector */
-size_t lVectorLength(lVector vector);
+size_t vectorLength(Vector vector);
 
 /* Check if empty */
-bool_t lVectorIsEmpty(lVector vector);
+bool_t vectorIsEmpty(Vector vector);
 
 /* Space of vector */
-size_t lVectorSpace(lVector vector);
+size_t vectorSpace(Vector vector);
 
 /* Resize the space of vector */
-bool_t lVectorResize(lVector vector, size_t space);
+bool_t vectorResize(Vector vector, size_t space);
 
 /* Insert data at end */
-bool_t lVectorPushBack(lVector vector, ptr_t value);
+bool_t vectorPushBack(Vector vector, ptr_t value);
 
 /* Remove the last data */
-bool_t lVectorPopBack(lVector vector);
+bool_t vectorPopBack(Vector vector);
 
 /* Insert data */
-bool_t lVectorInsert(lVector vector, size_t site, ptr_t value);
+bool_t vectorInsert(Vector vector, size_t site, ptr_t value);
 
 /* Remove data */
-bool_t lVectorRemove(lVector vector, size_t site);
+bool_t vectorRemove(Vector vector, size_t site);
 
 /* Remove all data */
-void lVectorClear(lVector vector);
+void vectorClear(Vector vector);
 
 /* Set value */
-bool_t lVectorSetValue(lVector vector, size_t site, ptr_t value);
+bool_t vectorSetValue(Vector vector, size_t site, ptr_t value);
 
 /* Get value */
-bool_t lVectorGetValue(lVector vector, size_t site, ptr_t value);
+bool_t vectorGetValue(Vector vector, size_t site, ptr_t value);
 
 /* Get pointer to a data */
-ptr_t lVectorGetDataPointer(lVector vector,size_t site);
+ptr_t vectorGetDataPointer(Vector vector,size_t site);
 
 #ifdef __cplusplus
     }

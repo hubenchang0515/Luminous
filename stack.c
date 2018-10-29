@@ -1,4 +1,4 @@
-/* lStack.c - stack
+/* Stack.c - stack
 ** https://github.com/hubenchang0515/Luminous
 **
 ** Copyright (C) 2017 hubenchang0515
@@ -10,114 +10,114 @@
 
 #include <stdlib.h>
 #include <string.h>
-#include "lVector.h"
-#include "lStack.h"
+#include "vector.h"
+#include "stack.h"
 
 
-/* USE    : Create a lStack by size of stack frame
+/* USE    : Create a Stack by size of stack frame
  *
  * PARAM  : size - size of stack frame
  *
- * RETURN : new lStack or nullptr
+ * RETURN : new Stack or nullptr
  */
-lStack lStackCreateBySize(size_t size)
+Stack stackCreateBySize(size_t size)
 {
-    return lVectorCreateBySize(size);
+    return vectorCreateBySize(size);
 }
 
 
 
 /* USE    : Delete stack
  *
- * PARAM  : stack - lStack to delete
+ * PARAM  : stack - Stack to delete
  *
  * RETURN : void
  */
-void lStackDelete(lStack stack)
+void stackDelete(Stack stack)
 {
-    lVectorDelete(stack);
+    vectorDelete(stack);
 }
 
 
 
 /* USE    : Clear all data
  * 
- * PARAM  : stack - lStack to clear
+ * PARAM  : stack - Stack to clear
  *
  * RETURN : void
  */
-void lStackClear(lStack stack)
+void stackClear(Stack stack)
 {
-    lVectorClear(stack);
+    vectorClear(stack);
 }
 
 
 
 /* USE    : Check if empty
  *
- * PARAM  : stack - lStack to check
+ * PARAM  : stack - Stack to check
  *
  * RETURN : true or false
  */
-bool_t lStackIsEmpty(lStack stack)
+bool_t stackIsEmpty(Stack stack)
 {
-    return lVectorIsEmpty(stack);
+    return vectorIsEmpty(stack);
 }
 
 
 
 /* USE    : Push a stack frame into stack
  *
- * PARAM  : stack - lStack to push
+ * PARAM  : stack - Stack to push
  *          value - value to push
  *
  * return : true or false
  */
-bool_t lStackPush(lStack stack, ptr_t value)
+bool_t stackPush(Stack stack, ptr_t value)
 {
-    return lVectorPushBack(stack, value);
+    return vectorPushBack(stack, value);
 }
 
 
 
 /* USE    : Pop a frame from stack
  *
- * PARAM  : stack - lStack to pop
+ * PARAM  : stack - Stack to pop
  *          value - store the return value
  *
  * return : true or false
  */
-bool_t lStackPop(lStack stack, ptr_t value)
+bool_t stackPop(Stack stack, ptr_t value)
 {
-    return lVectorGetValue(stack, lVectorLength(stack) - 1, value) &&
-            lVectorPopBack(stack);
+    return vectorGetValue(stack, vectorLength(stack) - 1, value) &&
+            vectorPopBack(stack);
 }
 
 
 
 /* USE    : Get value of top but not remove it
  *
- * PARAM  : stack - lStack to pop
+ * PARAM  : stack - Stack to pop
  *          value - store the return value
  *
  * return : true or false
  */
-bool_t lStackGetTop(lStack stack, ptr_t value)
+bool_t stackGetTop(Stack stack, ptr_t value)
 {
-    return lVectorGetValue(stack,lVectorLength(stack) - 1, value);
+    return vectorGetValue(stack,vectorLength(stack) - 1, value);
 }
 
 
 
 /* USE    : Set value of top rather than push
- * PARAM  : stack - lStack to pop
+ * PARAM  : stack - Stack to pop
  *          value - store the return value
  *
  * return : true or false
  */
-bool_t lStackSetTop(lStack stack, ptr_t value)
+bool_t stackSetTop(Stack stack, ptr_t value)
 {
-    return lVectorSetValue(stack, lVectorLength(stack) - 1, value);
+    return vectorSetValue(stack, vectorLength(stack) - 1, value);
 }
 
 
@@ -128,7 +128,7 @@ bool_t lStackSetTop(lStack stack, ptr_t value)
  *
  * RETURN : stack frame count of stack
  */
-size_t lStackCount(lStack stack)
+size_t stackCount(Stack stack)
 {
-    return lVectorLength(stack);
+    return vectorLength(stack);
 }

@@ -30,7 +30,7 @@
 		typedef signed char     schar_t;  // signed char
 		typedef unsigned char   uchar_t;  // unsigned char
 		typedef bool            bool_t;   // boolean
-#		include "lPointer.hpp"  // in C++
+#		include "pointer.hpp"  // in C++
 #	endif // __cplusplus
 #endif // LUMINOUS_NO_TYPE
 

@@ -1,4 +1,4 @@
-/* lStack.h - stack
+/* Stack.h - stack
 ** https://github.com/hubenchang0515/Luminous
 **
 ** Copyright (C) 2017 hubenchang0515
@@ -11,44 +11,44 @@
 #ifndef LUMINOUS_STACK_H
 #define LUMINOUS_STACK_H
 
-#include "lCore.h"
-#include "lVector.h"
+#include "core.h"
+#include "vector.h"
 
 #ifdef __cplusplus 
 	extern "C" {
 #endif
 
-typedef lVector lStack;
+typedef Vector Stack;
 
-/* Create lStack */
-lStack lStackCreateBySize(size_t size);
-#ifndef lStackCreate
-#   define lStackCreate(T) lStackCreateBySize(sizeof(T))
-#endif //lStackCreate
+/* Create Stack */
+Stack stackCreateBySize(size_t size);
+#ifndef stackCreate
+#   define stackCreate(T) stackCreateBySize(sizeof(T))
+#endif //stackCreate
 
-/* Delete lStack */
-void lStackDelete(lStack stack);
+/* Delete Stack */
+void stackDelete(Stack stack);
 
 /* Clear all data */
-void lStackClear(lStack stack);
+void stackClear(Stack stack);
 
 /* Check if empty */
-bool_t lStackIsEmpty(lStack stack);
+bool_t stackIsEmpty(Stack stack);
 
 /* Push a frame into stack */
-bool_t lStackPush(lStack stack, ptr_t value);
+bool_t stackPush(Stack stack, ptr_t value);
 
 /* Pop a frame from stack */
-bool_t lStackPop(lStack stack, ptr_t value);
+bool_t stackPop(Stack stack, ptr_t value);
 
 /* Get value of top but not remove it */
-bool_t lStackGetTop(lStack stack, ptr_t value);
+bool_t stackGetTop(Stack stack, ptr_t value);
 
 /* Set value of top */
-bool_t lStackSetTop(lStack stack, ptr_t value);
+bool_t stackSetTop(Stack stack, ptr_t value);
 
 /* stack frame count of stack */
-size_t lStackCount(lStack stack);
+size_t stackCount(Stack stack);
 
 #ifdef __cplusplus
     }

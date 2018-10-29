@@ -1,4 +1,4 @@
-/* lQueue.c - deque
+/* Queue.c - deque
 ** https://github.com/hubenchang0515/Luminous
 **
 ** Copyright (C) 2017 hubenchang0515
@@ -8,30 +8,30 @@
 ** LISENCE : LGPL v3.0
 */
 
-#include "lQueue.h"
+#include "queue.h"
 
-/* USE    : Create a lQueue
+/* USE    : Create a Queue
  *
  * PARAM  : size - size of one data
  *
- * RETURN : new lQueue or nullptr
+ * RETURN : new Queue or nullptr
  */
-lQueue lQueueCreateBySize(size_t size)
+Queue queueCreateBySize(size_t size)
 {
-    return lListCreateBySize(size);
+    return listCreateBySize(size);
 }
 
 
 
 /* USE    : Delete queue
  *
- * PARAM  : queue - lQueue to delete
+ * PARAM  : queue - Queue to delete
  *
  * RETURN : void
  */
-void lQueueDelete(lQueue queue)
+void queueDelete(Queue queue)
 {
-    lListDelete(queue);
+    listDelete(queue);
 }
 
 
@@ -42,52 +42,52 @@ void lQueueDelete(lQueue queue)
  *
  * RETURN : void
  */
-void lQueueClear(lQueue queue)
+void queueClear(Queue queue)
 {
-    lListClear(queue);
+    listClear(queue);
 }
 
 
 
 /* USE    : Check Empty
  *
- * PARAM  : queue - lQueue to check
+ * PARAM  : queue - Queue to check
  *
  * RETURN : true or false
  */
-bool_t lQueueIsEmpty(lQueue queue)
+bool_t queueIsEmpty(Queue queue)
 {
-    return lListIsEmpty(queue);
+    return listIsEmpty(queue);
 }
 
 
 
 /* USE    : Push Back 
  *
- * PARAM  : queue - lQueue to add node
+ * PARAM  : queue - Queue to add node
  *          value - value of new node
  *
  * RETURN : true or false
  */
-bool_t lQueuePush(lQueue queue, ptr_t value)
+bool_t queuePush(Queue queue, ptr_t value)
 {
-    return lListPushBack(queue,value) != nullptr;
+    return listPushBack(queue,value) != nullptr;
 }
 
 /* USE    : Pop front
  *
- * PARAM  : queue - lQueue to add node
+ * PARAM  : queue - Queue to add node
  *          value - value of new node
  *
  * RETURN : true or false
  */
-bool_t lQueuePop(lQueue queue, ptr_t value)
+bool_t queuePop(Queue queue, ptr_t value)
 {
-    lListIterator p = lListBegin(queue);
+    ListIterator p = listBegin(queue);
     if(p != nullptr)
     {
-        lListGetValue(p,value);
-        lListPopFront(queue); 
+        listGetValue(p,value);
+        listPopFront(queue); 
         return true;
     }
     else
@@ -100,30 +100,30 @@ bool_t lQueuePop(lQueue queue, ptr_t value)
 
 /* USR    : Push Back
  *
- * PARAM  : queue - lQueue to add node
+ * PARAM  : queue - Queue to add node
  *          value - value of new node
  *
  * RETURN : true or false
  */ 
-bool_t lQueuePushBack(lQueue queue, ptr_t value)
+bool_t queuePushBack(Queue queue, ptr_t value)
 {
-    return lListPushBack(queue,value) != nullptr;
+    return listPushBack(queue,value) != nullptr;
 }
 
 /* USE    : Pop Back
  *
- * PARAM  : queue - lQueue to add node
+ * PARAM  : queue - Queue to add node
  *          value - value of new node
  *
  * RETURN : true or false
  */ 
-bool_t lQueuePopBack(lQueue queue, ptr_t value)
+bool_t queuePopBack(Queue queue, ptr_t value)
 {
-    lListIterator p = lListEnd(queue);
+    ListIterator p = listEnd(queue);
     if(p != nullptr)
     {
-        lListGetValue(p,value);
-        lListPopBack(queue);
+        listGetValue(p,value);
+        listPopBack(queue);
         return true;
     }
     else
@@ -134,30 +134,30 @@ bool_t lQueuePopBack(lQueue queue, ptr_t value)
 
 /* USE    : Push Front
  *
- * PARAM  : queue - lQueue to add node
+ * PARAM  : queue - Queue to add node
  *          value - value of new node
  *
  * RETURN : true or false
  */ 
-bool_t lQueuePushFront(lQueue queue, ptr_t value)
+bool_t queuePushFront(Queue queue, ptr_t value)
 {
-    return lListPushFront(queue,value) != nullptr;
+    return listPushFront(queue,value) != nullptr;
 }
 
 /* USE    : Pop Front
  *
- * PARAM  : queue - lQueue to add node
+ * PARAM  : queue - Queue to add node
  *          value - value of new node
  *
  * RETURN : true or false
  */ 
-bool_t lQueuePopFront(lQueue queue, ptr_t value)
+bool_t queuePopFront(Queue queue, ptr_t value)
 {
-    lListIterator p = lListBegin(queue);
+    ListIterator p = listBegin(queue);
     if(p != nullptr)
     {
-        lListGetValue(p,value);
-        lListPopFront(queue); 
+        listGetValue(p,value);
+        listPopFront(queue); 
         return true;
     }
     else
@@ -168,17 +168,17 @@ bool_t lQueuePopFront(lQueue queue, ptr_t value)
 
 /* USE    : Get Front but not remove it
  *
- * PARAM  : queue - lQueue to add node
+ * PARAM  : queue - Queue to add node
  *          value - value of new node
  *
  * RETURN : true or false
  */ 
-bool_t lQueueGetFront(lQueue queue, ptr_t value)
+bool_t queueGetFront(Queue queue, ptr_t value)
 {
-    lListIterator p = lListBegin(queue);
+    ListIterator p = listBegin(queue);
     if(p != nullptr)
     {
-        lListGetValue(p,value);
+        listGetValue(p,value);
         return true;
     }
     else
@@ -191,17 +191,17 @@ bool_t lQueueGetFront(lQueue queue, ptr_t value)
 
 /* USE    : Set Front rather than push
  *
- * PARAM  : queue - lQueue to add node
+ * PARAM  : queue - Queue to add node
  *          value - value of new node
  *
  * RETURN : true or false
  */ 
-bool_t lQueueSetFront(lQueue queue, ptr_t value)
+bool_t queueSetFront(Queue queue, ptr_t value)
 {
-    lListIterator p = lListBegin(queue);
+    ListIterator p = listBegin(queue);
     if(p != nullptr)
     {
-        lListSetValue(p,value);
+        listSetValue(p,value);
         return true;
     }
     else
@@ -214,17 +214,17 @@ bool_t lQueueSetFront(lQueue queue, ptr_t value)
 
 /* USE    : Get Back but not remove it
  *
- * PARAM  : queue - lQueue to add node
+ * PARAM  : queue - Queue to add node
  *          value - value of new node
  *
  * RETURN : true or false
  */ 
-bool_t lQueueGetBack(lQueue queue, ptr_t value)
+bool_t queueGetBack(Queue queue, ptr_t value)
 {
-    lListIterator p = lListEnd(queue);
+    ListIterator p = listEnd(queue);
     if(p != nullptr)
     {
-        lListGetValue(p,value);
+        listGetValue(p,value);
         return true;
     }
     else
@@ -237,17 +237,17 @@ bool_t lQueueGetBack(lQueue queue, ptr_t value)
 
 /* USE    : Set Back rather than push
  *
- * PARAM  : queue - lQueue to add node
+ * PARAM  : queue - Queue to add node
  *          value - value of new node
  *
  * RETURN : true or false
  */ 
-bool_t lQueueSetBack(lQueue queue, ptr_t value)
+bool_t queueSetBack(Queue queue, ptr_t value)
 {
-    lListIterator p = lListEnd(queue);
+    ListIterator p = listEnd(queue);
     if(p != nullptr)
     {
-        lListSetValue(p,value);
+        listSetValue(p,value);
         return true;
     }
     else
@@ -259,11 +259,11 @@ bool_t lQueueSetBack(lQueue queue, ptr_t value)
 
 /* USE    : Count
  *
- * PARAM  : queue - lQueue to get count
+ * PARAM  : queue - Queue to get count
  *
  * RETURN : count of queue
  */
-size_t lQueueCount(lQueue queue)
+size_t queueCount(Queue queue)
 {
-    return lListCount(queue);
+    return listCount(queue);
 }

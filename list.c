@@ -1,4 +1,4 @@
-/* lList.c - Linked list.
+/* List.c - Linked list.
 ** https://github.com/hubenchang0515/Luminous
 **
 ** Copyright (C) 2017 hubenchang0515
@@ -11,15 +11,15 @@
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
-#include "lList.h"
+#include "list.h"
 
 /* WARNING : This is a UB(Undefined Behavior) */
 #define SETCSTPTR(CSTPTR , ADDR) ((*(ptr_t*)(&(CSTPTR))) = ADDR)
 
-/* Create a lListNode , return lListIterator or nnullptr */
-static lListIterator lListCreateNodeBySize(size_t datasize)
+/* Create a ListNode , return ListIterator or nnullptr */
+static ListIterator lListCreateNodeBySize(size_t datasize)
 {
-	lListIterator node = (lListIterator)malloc(sizeof(lListNode));
+	ListIterator node = (ListIterator)malloc(sizeof(ListNode));
 	if(node == nullptr)
 	{
 		return nullptr;
@@ -46,11 +46,11 @@ static lListIterator lListCreateNodeBySize(size_t datasize)
  *
  * PARAM  : datasize - size of node's data
  *
- * RETURN : lList or nullptr
+ * RETURN : List or nullptr
  */
-lList lListCreateBySize(size_t datasize)
+List listCreateBySize(size_t datasize)
 {
-	lList list = (lList)malloc(sizeof(lListInfo));
+	List list = (List)malloc(sizeof(ListInfo));
 	if(list == nullptr)
 	{
 		return nullptr;
@@ -68,13 +68,13 @@ lList lListCreateBySize(size_t datasize)
 /*
  * USE    : Delete linked list
  *
- * PARAM  : list - lList to delete
+ * PARAM  : list - List to delete
  *
  * RETURN : void
  */
-void lListDelete(lList list)
+void listDelete(List list)
 {
-	lListForEach(iter,list)
+	ListForEach(iter,list)
 	{
 		free(iter->data);
 		free(iter->prev);
@@ -89,9 +89,9 @@ void lListDelete(lList list)
  *
  * PARAM  : list - which list you want to get begin
  *
- * RETURN : lListIterator to begin lListNode of list
+ * RETURN : ListIterator to begin ListNode of list
  */
-lListIterator lListBegin(lList list)
+ListIterator listBegin(List list)
 {
 	return list->begin;
 }
@@ -102,9 +102,9 @@ lListIterator lListBegin(lList list)
  * 
  * PARAM  : list - which list you want to get end
  *
- * RETURN : lListIterator to end lListNode of list
+ * RETURN : ListIterator to end ListNode of list
  */
-lListIterator lListEnd(lList list)
+ListIterator listEnd(List list)
 {
 	return list->end;
 }
@@ -114,12 +114,12 @@ lListIterator lListEnd(lList list)
 /*
  * USE    : Set value of node
  *
- * PARAM  : node  - lListIterator to lListNode you want to set value
+ * PARAM  : node  - ListIterator to ListNode you want to set value
  *          value - pointer to value to set
  *
  * RETURN : void
  */
-void lListSetValue(lListIterator node, ptr_t value)
+void listSetValue(ListIterator node, ptr_t value)
 {
 	memcpy(node->data,value,node->size);
 }
@@ -129,12 +129,12 @@ void lListSetValue(lListIterator node, ptr_t value)
 /*
  * USE    : Get value of node
  *
- * PARAM  : node  - lListIterator to lListNode you want to get value
+ * PARAM  : node  - ListIterator to ListNode you want to get value
  *          value - pointer to return value
  *
  * RETURN : void
  */
-void lListGetValue(lListIterator node, ptr_t value)
+void listGetValue(ListIterator node, ptr_t value)
 {
 	memcpy(value,node->data,node->size);
 }
@@ -144,11 +144,11 @@ void lListGetValue(lListIterator node, ptr_t value)
 /*
  * USE    : Get pointer to data
  *
- * PARAM  : node - lListIterator to lListNode you want to get 
+ * PARAM  : node - ListIterator to ListNode you want to get 
  * 
  * RETURN : pointer to data
  */
-ptr_t lListGetDataPointer(lListIterator node)
+ptr_t listGetDataPointer(ListIterator node)
 {
 	return node->data;
 }
@@ -156,16 +156,16 @@ ptr_t lListGetDataPointer(lListIterator node)
 
 
 /*
- * USE    : Get a lListNode after node
+ * USE    : Get a ListNode after node
  *
- * PARAM  : node     - after this lListNode
+ * PARAM  : node     - after this ListNode
  *          distance - distance to node
  *
- * RETURN : lListNode we want or nullptr
+ * RETURN : ListNode we want or nullptr
  */
-lListIterator lListAfter(lListIterator node, size_t distance)
+ListIterator listAfter(ListIterator node, size_t distance)
 {
-	lListIterator p = node;
+	ListIterator p = node;
 	for(size_t i = 0; i < distance && p != nullptr; i++)
 	{
 		p = p->next;
@@ -177,16 +177,16 @@ lListIterator lListAfter(lListIterator node, size_t distance)
 
 
 /*
- * USE    : Get a lListNode before node
+ * USE    : Get a ListNode before node
  *
- * PARAM  : node     - before this lListNode
+ * PARAM  : node     - before this ListNode
  *          distance - distance to node
  *
- * RETURN : lListNode we want or nullptr
+ * RETURN : ListNode we want or nullptr
  */
-lListIterator lListBefore(lListIterator node, size_t distance)
+ListIterator listBefore(ListIterator node, size_t distance)
 {
-	lListIterator p = node;
+	ListIterator p = node;
 	for(size_t i = 0; i < distance && p != nullptr; i++)
 	{
 		p = p->prev;
@@ -197,16 +197,16 @@ lListIterator lListBefore(lListIterator node, size_t distance)
 
 
 
-/* USE    : Insert a lListNode after node 
+/* USE    : Insert a ListNode after node 
  *
- * PARAM  : node - after this lListNode
+ * PARAM  : node - after this ListNode
  *
- * RETURN : lListIterator to lListNode inserted or nullptr
+ * RETURN : ListIterator to ListNode inserted or nullptr
  */
-lListIterator lListInsertAfter(lListIterator node)
+ListIterator listInsertAfter(ListIterator node)
 {
 	/* insert */
-	lListIterator p = lListCreateNodeBySize(node->size);
+	ListIterator p = lListCreateNodeBySize(node->size);
 	if(p != nullptr)
 	{
 		p->list = node->list;
@@ -233,16 +233,16 @@ lListIterator lListInsertAfter(lListIterator node)
 
 
 
-/* USE    : Insert a lListNode before node 
+/* USE    : Insert a ListNode before node 
  *
- * PARAM  : node - before this lListNode
+ * PARAM  : node - before this ListNode
  *
- * RETURN : lListIterator to lListNode inserted or nullptr
+ * RETURN : ListIterator to ListNode inserted or nullptr
  */
-lListIterator lListInsertBefore(lListIterator node)
+ListIterator listInsertBefore(ListIterator node)
 {
 	/* insert */
-	lListIterator p = lListCreateNodeBySize(node->size);
+	ListIterator p = lListCreateNodeBySize(node->size);
 	if(p != nullptr)
 	{
 		p->list = node->list;
@@ -271,11 +271,11 @@ lListIterator lListInsertBefore(lListIterator node)
 
 /* USE    : Remove node 
  *
- * PARAM  : node - lListIterator to lListNode you want to remove
+ * PARAM  : node - ListIterator to ListNode you want to remove
  *
  * RETURN : void
  */
-void lListRemove(lListIterator node)
+void listRemove(ListIterator node)
 {
 	/* update end of list */
 	if(node->next == nullptr)
@@ -310,20 +310,20 @@ void lListRemove(lListIterator node)
 
 /* USE    : Remove all node
  *
- * PARAM  : list - lList to clear
+ * PARAM  : list - List to clear
  *
  * RETURN : void
  */
-void lListClear(lList list)
+void listClear(List list)
 {
-	lListIterator p   = lListEnd(list);
-	lListIterator pre = lListBefore(p,1);
+	ListIterator p   = listEnd(list);
+	ListIterator pre = listBefore(p,1);
 	while(p != nullptr)
 	{
 		free(p->data);
 		free(p);
 		p = pre;
-		pre = lListBefore(p,1);
+		pre = listBefore(p,1);
 	}
 
 	list->begin  = nullptr;
@@ -335,43 +335,43 @@ void lListClear(lList list)
 
 /* USE    : Head of list 
  *
- * PARAM  : node - lListIterator to any lListNode of list
+ * PARAM  : node - ListIterator to any ListNode of list
  *
- * RETURN : Head lListNode of list
+ * RETURN : Head ListNode of list
  */
-lListIterator lListHead(lListIterator node)
+ListIterator listHead(ListIterator node)
 {
-	lListIterator p = node->list->begin;
+	ListIterator p = node->list->begin;
 	
 	return p;
 }
 
 /* USE    : Tail of list
  *
- * PARAM  : node - lListIterator to any lListNode of list
+ * PARAM  : node - ListIterator to any ListNode of list
  *
- * RETURN : Tail lListNode of list
+ * RETURN : Tail ListNode of list
  */
-lListIterator lListTail(lListIterator node)
+ListIterator listTail(ListIterator node)
 {
-	lListIterator p = node->list->end;
+	ListIterator p = node->list->end;
 	
 	return p;
 }
 
-/* USE    : Find a lListNode after node
+/* USE    : Find a ListNode after node
  * 
- * PARAM  : node   - after this lListNode
+ * PARAM  : node   - after this ListNode
  *          value  - pointer to value
  *          ordinal - ordinal number 
  *
- * RETURN : number ordinal lListNode, whose data equals to value, 
+ * RETURN : number ordinal ListNode, whose data equals to value, 
  *          after node(inclusive) , or nullptr 
  */
 
-lListIterator lListFindAfter(lListIterator node, ptr_t value, size_t ordinal)
+ListIterator listFindAfter(ListIterator node, ptr_t value, size_t ordinal)
 {
-	lListIterator p = node;
+	ListIterator p = node;
 	for(size_t i = 0; i < ordinal && p != nullptr; p = p->next)
 	{
 		if(memcmp(p->data, value, p->size) == 0)
@@ -388,18 +388,18 @@ lListIterator lListFindAfter(lListIterator node, ptr_t value, size_t ordinal)
 	return p;
 }
 
-/* USE    : Find a lListNode before node
+/* USE    : Find a ListNode before node
  * 
- * PARAM  : node   - before this lListNode
+ * PARAM  : node   - before this ListNode
  *          value  - pointer to value
  *          ordinal - ordinal number 
  *
- * RETURN : number ordinal lListNode, whose data equals to value, 
+ * RETURN : number ordinal ListNode, whose data equals to value, 
  *          before node(inclusive) , or nullptr 
  */
-lListIterator lListFindBefore(lListIterator node, ptr_t value, size_t ordinal)
+ListIterator listFindBefore(ListIterator node, ptr_t value, size_t ordinal)
 {
-	lListIterator p = node;
+	ListIterator p = node;
 	for(size_t i = 0; i < ordinal && p != nullptr; p = p->prev)
 	{
 		if(memcmp(p->data, value, p->size) == 0)
@@ -416,13 +416,13 @@ lListIterator lListFindBefore(lListIterator node, ptr_t value, size_t ordinal)
 	return p;
 }
 
-/* USE    : lListNode number of list
+/* USE    : ListNode number of list
  *
- * PARAM  : lList
+ * PARAM  : List
  *
- * RETURN : lListNode number of list
+ * RETURN : ListNode number of list
  */
-size_t lListCount(lList list)
+size_t listCount(List list)
 {	
 	return list->length;
 }
@@ -431,33 +431,33 @@ size_t lListCount(lList list)
 
 /* USE    : check list if empty 
  *
- * PARAM  : list - lList you want to check
+ * PARAM  : list - List you want to check
  *
  * RETURN : true of false
  */
-bool_t lListIsEmpty(lList list)
+bool_t listIsEmpty(List list)
 {
 	return list->length == 0 ? true : false;
 }
 
 
 
-/* USE    : Insert a lListNode after end
+/* USE    : Insert a ListNode after end
  *
- * PARAM  : list  - lList you want to insert
+ * PARAM  : list  - List you want to insert
  *          value - value you want to insert
  *
- * RETURN : lListIterator to lListNode inserted or nullptr
+ * RETURN : ListIterator to ListNode inserted or nullptr
  */
-lListIterator lListPushBack(lList list, ptr_t value)
+ListIterator listPushBack(List list, ptr_t value)
 {
-	lListIterator p = list->end;
+	ListIterator p = list->end;
 	if(p != nullptr)
 	{
-		p = lListInsertAfter(p);
+		p = listInsertAfter(p);
 		if(p != nullptr)
 		{
-			lListSetValue(p,value);
+			listSetValue(p,value);
 		}
 	}
 	else // list is empty
@@ -472,7 +472,7 @@ lListIterator lListPushBack(lList list, ptr_t value)
 			list->begin = p;
 			list->end = p;
 			list->length = 1;
-			lListSetValue(p,value);
+			listSetValue(p,value);
 		}
 	}
 	
@@ -481,22 +481,22 @@ lListIterator lListPushBack(lList list, ptr_t value)
 
 
 
-/* USE    : Insert a lListNode before begin
+/* USE    : Insert a ListNode before begin
  *
- * PARAM  : list  - lList you want to insert
+ * PARAM  : list  - List you want to insert
  *          value - value you want to insert
  *
- * RETURN : lListIterator to lListNode inserted or nullptr
+ * RETURN : ListIterator to ListNode inserted or nullptr
  */
-lListIterator lListPushFront(lList list, ptr_t value)
+ListIterator listPushFront(List list, ptr_t value)
 {
-	lListIterator p = list->begin;
+	ListIterator p = list->begin;
 	if(p != nullptr)
 	{
-		p = lListInsertBefore(p);
+		p = listInsertBefore(p);
 		if(p != nullptr)
 		{
-			lListSetValue(p,value);
+			listSetValue(p,value);
 		}
 	}
 	else // list is empty
@@ -511,7 +511,7 @@ lListIterator lListPushFront(lList list, ptr_t value)
 			list->begin = p;
 			list->end = p;
 			list->length = 1;
-			lListSetValue(p,value);
+			listSetValue(p,value);
 		}
 	}
 	
@@ -520,17 +520,17 @@ lListIterator lListPushFront(lList list, ptr_t value)
 
 
 
-/* USE    : Remove end lListNode
+/* USE    : Remove end ListNode
  *
  * PARAM  : list - list you want to remove end
  *
  * RETURN : true or false
  */
-bool_t lListPopBack(lList list)
+bool_t listPopBack(List list)
 {
 	if(list->end != nullptr)
 	{
-		lListRemove(list->end);
+		listRemove(list->end);
 		return true;
 	}
 	else
@@ -539,17 +539,17 @@ bool_t lListPopBack(lList list)
 	}
 }
 
-/* USE    : Remove begin lListNode
+/* USE    : Remove begin ListNode
  *
  * PARAM  : list - list you want to remove end
  *
  * RETURN : true or false
  */
-bool_t lListPopFront(lList list)
+bool_t listPopFront(List list)
 {
 	if(list->begin != nullptr)
 	{
-		lListRemove(list->begin);
+		listRemove(list->begin);
 		return true;
 	}
 	else
@@ -560,30 +560,30 @@ bool_t lListPopFront(lList list)
 
 
 
-/* USE    : Get lListNode from begin
+/* USE    : Get ListNode from begin
  *
- * PARAM  : list    - which list you want to get lListNode
+ * PARAM  : list    - which list you want to get ListNode
  *          ordinal - ordinal to begin
  *
- * RETURN : lListIterator or nullptr
+ * RETURN : ListIterator or nullptr
  */
-lListIterator lListIndexAt(lList list, size_t ordinal)
+ListIterator listIndexAt(List list, size_t ordinal)
 {
-	return lListAfter(list->begin, ordinal);
+	return listAfter(list->begin, ordinal);
 }
 
 
 
-/* USE    : Get lListNode from end
+/* USE    : Get ListNode from end
  *
- * PARAM  : list    - which list you want to get lListNode
+ * PARAM  : list    - which list you want to get ListNode
  *          ordinal - ordinal to end
  *
- * RETURN : lListIterator or nullptr
+ * RETURN : ListIterator or nullptr
  */
-lListIterator lListInverseAt(lList list, size_t ordinal)
+ListIterator listInverseAt(List list, size_t ordinal)
 {
-	return lListBefore(list->end, ordinal);
+	return listBefore(list->end, ordinal);
 }
 
 

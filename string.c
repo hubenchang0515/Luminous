@@ -1,4 +1,4 @@
-/* lString.h - string
+/* zzz.h - String
 ** https://github.com/hubenchang0515/Luminous
 **
 ** Copyright (C) 2017 hubenchang0515
@@ -12,26 +12,26 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdarg.h>
-#include "lString.h"
+#include "string.h"
 
-/* USE    : Create lString
+/* USE    : Create String
  * 
- * PARAM  : cstr - a C style string  to init lString
+ * PARAM  : cstr - a C style String  to init String
  *
- * RETURN : lString of nullptr
+ * RETURN : String of nullptr
  */
-lString lStringCreate(const char_t* cstr)
+String stringCreate(const char_t* cstr)
 {
-    lString string = (lString)malloc(sizeof(lStringInfo));
+    String string = (String)malloc(sizeof(StringInfo));
     if(string != nullptr)
     {
-        string->space  = strlen(cstr);  
-        string->data   = (char_t*)malloc(string->space + 1);// also  end of 0
+		string->space  = strlen(cstr);
+		string->data   = (char_t*)malloc(string->space + 1);// also  end of 0
 
         if(string->data == nullptr)
         {
             free(string);
-            string = nullptr;
+			string = nullptr;
         }
         else
         {
@@ -44,13 +44,13 @@ lString lStringCreate(const char_t* cstr)
 
 
 
-/* USE    : Delete string
+/* USE    : Delete String
  *
- * PARAM  : string - lString to delete
+ * PARAM  : String - String to delete
  *
  * RETURN : void
  */
-void lStringDelete(lString string)
+void stringDelete(String string)
 {
     free(string->data);
     free(string);
@@ -58,33 +58,33 @@ void lStringDelete(lString string)
 
 
 
-/* USE    : Return length of string
+/* USE    : Return length of String
  *
- * PARAM  : string - lString to get length
+ * PARAM  : String - String to get length
  *
- * RETURN : length of string
+ * RETURN : length of String
  */
-size_t lStringLength(lString string)
+size_t stringLength(String string)
 {
     return strlen(string->data);
 }
 
 
 
-/* USE    : Resize space of string
+/* USE    : Resize space of String
  *
- * PARAM  : string - lString to resize
+ * PARAM  : String - String to resize
  *          size   - new size
  *
  * RETURN : true or false
  */
-bool_t lStringResize(lString string, size_t size)
+bool_t stringResize(String string, size_t size)
 {
     char_t* p = (char_t*)realloc((void*)string->data,size + 1);
     if(p != nullptr)
     {
-        string->space = size;
-        string->data = p;
+		string->space = size;
+		string->data = p;
         return true;
     }
     else
@@ -97,37 +97,37 @@ bool_t lStringResize(lString string, size_t size)
 
 /* USE    : Resize space to length
  *
- * PARAM  : string - lString to reduce
+ * PARAM  : String - String to reduce
  *
  * RETURN : void
  */
-void lStringReduce(lString string)
+void stringReduce(String string)
 {
-    string->data = (char_t*)realloc((void*)string->data, strlen(string->data) + 1);
+	string->data = (char_t*)realloc((void*)string->data, strlen(string->data) + 1);
 }
 
 
 
-/* USE    : Copy string
+/* USE    : Copy String
  *
- * PARAM  : string - lString to copy
+ * PARAM  : String - String to copy
  *
- * RETURN : new lString or nullptr
+ * RETURN : new String or nullptr
  */
-lString lStringCopy(lString string)
+String stringCopy(String string)
 {
-    return lStringCreate(string->data);
+    return stringCreate(string->data);
 }
 
 
 
-/* USE    : Return readonly data of string
+/* USE    : Return readonly data of String
  *
- * PARAM  : string - lString to get value
+ * PARAM  : String - String to get value
  *
  * RETURN : const char_t* to data
  */
-const char_t* lStringValue(lString string)
+const char_t* stringValue(String string)
 {
     const char_t* data = string->data;
     return data;
@@ -135,13 +135,13 @@ const char_t* lStringValue(lString string)
 
 
 
-/* USE    : Return pointer to data of string
+/* USE    : Return pointer to data of String
  *
- * PARAM  : string - lString - lString to get data
+ * PARAM  : String - String - String to get data
  *
  * RETURN : char_t* to data
  */
-char_t* lStringData(lString string)
+char_t* stringData(String string)
 {
     char_t* data = string->data;
     return data;
@@ -149,16 +149,16 @@ char_t* lStringData(lString string)
 
 
 
-/* USE    : Set value of string
+/* USE    : Set value of String
  *
- * PARAM  : string - lString to set value
+ * PARAM  : String - String to set value
  *          cstr   - value
  * 
  * RETURN : true or false
  */
-bool_t lStringSetValue(lString string, const char_t* cstr)
+bool_t stringSetValue(String string, const char_t* cstr)
 {
-    if(lStringResize(string,strlen(cstr)))
+    if(stringResize(string,strlen(cstr)))
     {
         strcpy(string->data,cstr);
         return true;
@@ -171,30 +171,30 @@ bool_t lStringSetValue(lString string, const char_t* cstr)
 
 
 
-/* USE    : Get value of string
+/* USE    : Get value of String
  *
- * PARAM  : string - string to get value
+ * PARAM  : String - String to get value
  *          cstr   - save value
  *          len    - length of cstr
  *
  * RETURN : void
  */
-void lStringGetValue(lString string, char_t* cstr, size_t len)
+void stringGetValue(String String, char_t* cstr, size_t len)
 {
-    strncpy(cstr, string->data, len);
+    strncpy(cstr, String->data, len);
 }
 
 
 
-/* USE    : Remove a part of string
+/* USE    : Remove a part of String
  *
- * PARAM  : string - string to remove
+ * PARAM  : String - String to remove
  *          site   - begin of part to remove
  *          len    - length of part
  *
  * RETURN : true or false
  */
-bool_t lStringRemove(lString string, size_t site, size_t len)
+bool_t stringRemove(String string, size_t site, size_t len)
 {
     size_t length = strlen(string->data);
     if(site <= length && len <= length - site)
@@ -215,16 +215,16 @@ bool_t lStringRemove(lString string, size_t site, size_t len)
 
 
 
-/* USE    : Append string with cstr
+/* USE    : Append String with cstr
  *
- * PARAM  : string - lString append to
- *          cstr   - C style string appended
+ * PARAM  : String - String append to
+ *          cstr   - C style String appended
  *
  * RETURN : true or false
  */
-bool_t lStringAppend(lString string, const char_t* cstr)
+bool_t stringAppend(String string, const char_t* cstr)
 {
-    if(lStringResize(string, strlen(string->data) + strlen(cstr)))
+    if(stringResize(string, strlen(string->data) + strlen(cstr)))
     {
         strcat(string->data,cstr);
         return true;
@@ -237,15 +237,15 @@ bool_t lStringAppend(lString string, const char_t* cstr)
 
 
 
-/* USE    : Insert to string
+/* USE    : Insert to String
  * 
- * PARAM  : string - lString to insert
- *          site   - site of string
- *          cstr   - C style string
+ * PARAM  : String - String to insert
+ *          site   - site of String
+ *          cstr   - C style String
  */
-bool_t lStringInsert(lString string, size_t site, const char_t* cstr)
+bool_t stringInsert(String string, size_t site, const char_t* cstr)
 {
-    if(lStringResize(string, strlen(string->data) + strlen(cstr)))
+    if(stringResize(string, strlen(string->data) + strlen(cstr)))
     {
         size_t len = strlen(cstr);
         char_t* src  = string->data + site;
@@ -262,29 +262,29 @@ bool_t lStringInsert(lString string, size_t site, const char_t* cstr)
 
 
 
-/* USE    : Replace a part of string
+/* USE    : Replace a part of String
  *
- * PARAM  : string - lString to replace
- *          site   - site of string
+ * PARAM  : String - String to replace
+ *          site   - site of String
  *          len    - length to remove
- *          cstr   - C style string to insert
+ *          cstr   - C style String to insert
  */
-bool_t lStringReplace(lString string, size_t site, size_t len, const char_t* cstr)
+bool_t stringReplace(String string, size_t site, size_t len, const char_t* cstr)
 {
-    return lStringRemove(string,site,len) && lStringInsert(string,site,cstr);
+    return stringRemove(string,site,len) && stringInsert(string,site,cstr);
 }
 
 
 
-/* USE    : Set lString as sprintf
+/* USE    : Set String as sprintf
  *
- * PARAM  : string - lString to save data
- *          fmt    - format string as sprintf in stdio.h
+ * PARAM  : String - String to save data
+ *          fmt    - format String as sprintf in stdio.h
  *          ...    - va_arg list as sprintf in stdio.h
  *
  * RETURN : true or false
  */
-bool_t lStringSprintf(lString string, const char* fmt,...)
+bool_t stringSprintf(String string, const char* fmt,...)
 {
     va_list args;
     while(1)
@@ -298,7 +298,7 @@ bool_t lStringSprintf(lString string, const char* fmt,...)
         {
             return true;
         }
-        else if(len >= bufsiz  && lStringResize(string,len))
+        else if(len >= bufsiz  && stringResize(string,len))
         {
             continue;
         }
