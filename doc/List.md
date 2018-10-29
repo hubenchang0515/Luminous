@@ -69,7 +69,7 @@ int main()
 {
 
 	/* Create list */
-	list list = listCreate(char[10]);
+	List list = listCreate(char[10]);
 	
 	/* Push 10 node */
 	char str[10] = "string 1";
@@ -95,11 +95,11 @@ int main()
 	
 	/* Insert hello after 2 */
 	char hello[10] = "hello";
-	listIterator p = listInsertAfter(listBegin(list));
+	ListIterator p = listInsertAfter(listBegin(list));
 	listSetValue(p,hello);
 	
 	/* Traverse and print */
-	listForEach(i,list)
+	ListForEach(i,list)
 	{
 		listGetValue(i,str);
 		printf("%s\n",str);

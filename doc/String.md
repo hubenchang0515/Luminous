@@ -40,7 +40,7 @@ struct StringInfo
 
 int main()
 {
-	string str = stringCreate("");
+	String str = stringCreate("");
 	stringSprintf(str,"pi = %.2lf",3.14);
 	stringAppend(str,"15926");
 	stringReplace(str,0,2,"Circumference Ratio");

@@ -35,7 +35,7 @@ typedef List Queue;
 
 int main()
 {
-	queue queue = queueCreate(char[100]);
+	Queue queue = queueCreate(char[100]);
 	
 	char str[100];
 	

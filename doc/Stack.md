@@ -30,7 +30,7 @@ typedef Vector Stack;
 
 int main()
 {
-	stack stack = stackCreate(char[64]);
+	Stack stack = stackCreate(char[64]);
 	char str[64] = "Luminous";
 	stackPush(stack,str);
 	strncpy(str,"hubenchang0515",64);
