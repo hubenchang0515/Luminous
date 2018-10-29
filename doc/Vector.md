@@ -46,7 +46,7 @@ struct vectorInfo
 int main()
 {
 	/* Create vector */
-	vector vector = vectorCreate(char[32]);
+	Vector vector = vectorCreate(char[32]);
 	
 	/* Push 10 data to the vector */
 	char str[32];	
@@ -66,7 +66,7 @@ int main()
 	vectorSetValue(vector,2,str);
 	
 	/* Traverse */
-	vectorForEach(i,vector)
+	VectorForEach(i,vector)
 	{
 		printf("%s\n",(char*)i);
 	}
